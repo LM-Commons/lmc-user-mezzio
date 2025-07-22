@@ -54,7 +54,7 @@ class Authentication implements AuthenticationInterface
     public function unauthorizedResponse(ServerRequestInterface $request): ResponseInterface
     {
         return $this->responseFactory
-            ->createResponse(401)
+            ->createResponse(302)
             ->withHeader(
                 'Location',
                 $this->urlHelper->generate('lmcuser.login')

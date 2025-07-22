@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Lmc\User\Mezzio\UserRepository;
+namespace Lmc\User\Mezzio;
 
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Authentication\UserRepositoryInterface;

@@ -15,6 +15,7 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             'routes'       => $this->getRouterConfig(),
+            'templates'    => $this->getTemplates(),
         ];
     }
 

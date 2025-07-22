@@ -1,31 +1,35 @@
 {
-  "name": "lm-commons/repository-template",
-  "description": "Repository template",
+  "name": "lm-commons/lmc-user-mezzio",
+  "description": "LmcUser for Mezzio",
   "license": "MIT",
   "authors": [
     {
-      "name": "Firstname Lastname",
-      "email": "email@example.com"
+      "name": "Eric Richer",
+      "email": "eric.richer@vistoconsulting.com"
     }
   ],
   "require": {
-    "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
+    "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
+    "lm-commons/lmc-user-common": "1.0.x-dev"
   },
   "require-dev": {
-    "laminas/laminas-coding-standard": "^2.5",
-    "phpunit/phpunit": "^10.5",
+    "laminas/laminas-coding-standard": "^3.1",
+    "phpunit/phpunit": "^11.5 || ^12.1",
     "psalm/plugin-phpunit": "^0.19",
-    "vimeo/psalm": "^5.25"
+    "vimeo/psalm": "^6.0"
   },
   "autoload": {
-
+    "Lmc\\User\\Mezzio\\": "src/"
   },
   "autoload-dev": {
-
+    "LmcTest\\User\\Mezzio": "test/"
   },
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "platform": {
+      "php": "8.2.99"
     }
   },
   "scripts": {
@@ -39,5 +43,11 @@
     "cs-fix": "phpcbf",
     "test-coverage-html": "phpunit --coverage-html ./build/html",
     "static-analysis": "psalm --shepherd --stats"
-  }
+  },
+  "repositories": [
+    {
+      "type": "github",
+      "url": "https://github.com/lm-commons/LmcUserCommon.git"
+    }
+  ]
 }

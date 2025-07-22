@@ -14,8 +14,10 @@
     "lm-commons/lmc-user-common": "1.0.x-dev",
     "mezzio/mezzio-authentication": "^1.11",
     "psr/http-factory": "^1.0",
+    "mezzio/mezzio-template": "^2.1",
     "mezzio/mezzio-helpers": "^5.18",
-    "mezzio/mezzio-session": "^1.16"
+    "mezzio/mezzio-session": "^1.16",
+    "mezzio/mezzio-laminasrouter": "^3.0"
   },
   "require-dev": {
     "laminas/laminas-coding-standard": "^3.1",

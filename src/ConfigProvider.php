@@ -35,22 +35,21 @@ class ConfigProvider
     {
         return [
             'lmcuser' => [
+                'methods' => ['GET'],
                 'middleware'    => [
                     UserHandler::class,
                 ],
                 'path'          => '/user',
                 'type'          => Literal::class,
                 'options'       => [],
-                'nay_terminate' => true,
-                'child_routes'  => [
-                    'login' => [
-                        'type'       => Literal::class,
-                        'options'    => [],
-                        'path'       => '/login',
-                        'middleware' => [
-                            LoginHandler::class,
-                        ],
-                    ],
+            ],
+            'lmcuser.login' => [
+                'type'       => Literal::class,
+                'methods' => ['GET'],
+                'options'    => [],
+                'path'       => '/login',
+                'middleware' => [
+                    LoginHandler::class,
                 ],
             ],
         ];

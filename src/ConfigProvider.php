@@ -34,18 +34,18 @@ class ConfigProvider
     public function getRouterConfig(): array
     {
         return [
-            'lmcuser' => [
-                'methods' => ['GET'],
-                'middleware'    => [
+            'lmcuser'       => [
+                'methods'    => ['GET'],
+                'middleware' => [
                     UserHandler::class,
                 ],
-                'path'          => '/user',
-                'type'          => Literal::class,
-                'options'       => [],
+                'path'       => '/user',
+                'type'       => Literal::class,
+                'options'    => [],
             ],
             'lmcuser.login' => [
                 'type'       => Literal::class,
-                'methods' => ['GET'],
+                'methods'    => ['GET'],
                 'options'    => [],
                 'path'       => '/login',
                 'middleware' => [

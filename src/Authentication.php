@@ -22,11 +22,11 @@ class Authentication implements AuthenticationInterface
     private $userFactory;
 
     public function __construct(
-        private UrlHelperInterface $urlHelper,
+        private UrlHelperInterface       $urlHelper,
         private ResponseFactoryInterface $responseFactory,
-        private Options $options,
-        private User $mapper,
-        callable $userFactory
+        private Options                  $options,
+        private readonly User            $mapper,
+        callable                         $userFactory
     ) {
         $this->userFactory = static fn(string $identity, array $roles = [], array $details = []): UserInterface
         => $userFactory($identity, $roles, $details);
@@ -53,11 +53,12 @@ class Authentication implements AuthenticationInterface
 
     public function unauthorizedResponse(ServerRequestInterface $request): ResponseInterface
     {
+        $redirectRoute = $this->options->getLoginRedirectRoute();
         return $this->responseFactory
             ->createResponse(302)
             ->withHeader(
                 'Location',
-                $this->urlHelper->generate('lmcuser.login')
+                $this->urlHelper->generate($redirectRoute)
             );
     }
 }

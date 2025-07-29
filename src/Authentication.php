@@ -53,7 +53,7 @@ class Authentication implements AuthenticationInterface
 
     public function unauthorizedResponse(ServerRequestInterface $request): ResponseInterface
     {
-        $redirectRoute = $this->options->getLoginRedirectRoute();
+        $redirectRoute = $this->options->getUnauthorizedRedirectRoute();
         return $this->responseFactory
             ->createResponse(302)
             ->withHeader(

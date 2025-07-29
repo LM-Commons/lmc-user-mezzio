@@ -7,6 +7,7 @@ namespace Lmc\User\Mezzio\Handler;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Laminas\Form\FormInterface;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Authentication\AuthenticationInterface;
 use Mezzio\Template\TemplateRendererInterface;
@@ -20,6 +21,7 @@ class LoginHandler implements RequestHandlerInterface
         private TemplateRendererInterface $renderer,
         private AuthenticationInterface $adapter,
         private Options $options,
+        private FormInterface $loginForm,
     ) {
     }
 
@@ -38,14 +40,15 @@ class LoginHandler implements RequestHandlerInterface
     private function handleGet(ServerRequestInterface $request): ResponseInterface
     {
         if ($this->options->getLoginRedirectRoute()) {
-            $redirect = $request->getQueryParams()['redirect'];
+            $queryParams = $request->getQueryParams();
+            $redirect    = $queryParams['redirect'] ?? false;
         } else {
             $redirect = false;
         }
         return new HtmlResponse($this->renderer->render(
             'lmcuser::login',
             [
-                'loginForm'          => null,
+                'loginForm'          => $this->loginForm,
                 'redirect'           => $redirect,
                 'enableRegistration' => $this->options->getEnableRegistration(),
             ]

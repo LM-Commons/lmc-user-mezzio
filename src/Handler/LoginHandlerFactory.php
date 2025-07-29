@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\Handler;
 
+use Laminas\Form\FormInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Authentication\AuthenticationInterface;
@@ -21,7 +22,8 @@ class LoginHandlerFactory implements FactoryInterface
         return new LoginHandler(
             $container->get(TemplateRendererInterface::class),
             $container->get(AuthenticationInterface::class),
-            $container->get(Options::class)
+            $container->get(Options::class),
+            $container->get('lmcuser_login_form')
         );
     }
 }

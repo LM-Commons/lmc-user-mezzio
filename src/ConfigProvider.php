@@ -25,7 +25,7 @@ class ConfigProvider
     {
         return [
             'aliases'   => [
-                'lmcuser_login_form' => LoginHandler::class,
+                'lmcuser_login_form' => LoginForm::class,
             ],
             'factories' => [
                 Authentication::class  => AuthenticationFactory::class,

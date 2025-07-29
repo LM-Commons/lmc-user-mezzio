@@ -13,6 +13,7 @@ class Options extends AbstractOptions
     //phpcs:enable
 
     protected bool $useRedirectParameterIfPresent = true;
+    protected string $unauthorizedRedirectRoute   = 'lmcuser.login';
     protected string $loginRedirectRoute          = 'lmcuser';
     protected string $logoutRedirectRoute         = 'lmcuser/login';
     protected int $loginFormTimeout               = 300;
@@ -288,5 +289,16 @@ class Options extends AbstractOptions
     public function getFormCaptchaOptions(): array
     {
         return $this->formCaptchaOptions;
+    }
+
+    public function getUnauthorizedRedirectRoute(): string
+    {
+        return $this->unauthorizedRedirectRoute;
+    }
+
+    public function setUnauthorizedRedirectRoute(string $unauthorizedRedirectRoute): self
+    {
+        $this->unauthorizedRedirectRoute = $unauthorizedRedirectRoute;
+        return $this;
     }
 }

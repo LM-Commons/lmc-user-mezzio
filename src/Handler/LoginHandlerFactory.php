@@ -8,6 +8,7 @@ use Laminas\Form\FormInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Authentication\AuthenticationInterface;
+use Mezzio\Helper\UrlHelper;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 
@@ -23,7 +24,8 @@ class LoginHandlerFactory implements FactoryInterface
             $container->get(TemplateRendererInterface::class),
             $container->get(AuthenticationInterface::class),
             $container->get(Options::class),
-            $container->get('lmcuser_login_form')
+            $container->get('lmcuser_login_form'),
+            $container->get(UrlHelper::class)
         );
     }
 }

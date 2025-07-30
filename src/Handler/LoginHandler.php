@@ -10,6 +10,7 @@ use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Form\FormInterface;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Authentication\AuthenticationInterface;
+use Mezzio\Helper\UrlHelper;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -22,6 +23,7 @@ class LoginHandler implements RequestHandlerInterface
         private AuthenticationInterface $adapter,
         private Options $options,
         private FormInterface $loginForm,
+        private UrlHelper $urlHelper,
     ) {
     }
 
@@ -57,6 +59,8 @@ class LoginHandler implements RequestHandlerInterface
 
     private function handlePost(ServerRequestInterface $request): ResponseInterface
     {
-        return new RedirectResponse($this->options->getLoginRedirectRoute());
+        return new RedirectResponse(
+            $this->urlHelper->generate($this->options->getLoginRedirectRoute())
+        );
     }
 }

@@ -16,19 +16,20 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+use function strtoupper;
+
 class Authentication implements AuthenticationInterface
 {
-
     /** @var callable */
     private $userFactory;
 
     public function __construct(
-        private UrlHelperInterface       $urlHelper,
+        private UrlHelperInterface $urlHelper,
         private ResponseFactoryInterface $responseFactory,
-        private Options                  $options,
-        private readonly User            $mapper,
-        callable                         $userFactory,
-        private UserRepositoryInterface  $userRepository
+        private Options $options,
+        private readonly User $mapper,
+        callable $userFactory,
+        private UserRepositoryInterface $userRepository
     ) {
         $this->userFactory = static fn(string $identity, array $roles = [], array $details = []): UserInterface
         => $userFactory($identity, $roles, $details);
@@ -44,25 +45,24 @@ class Authentication implements AuthenticationInterface
         if ($session->has(UserInterface::class)) {
             return $this->createUserFromSession($session);
         }
-        
+
         if ('POST' !== strtoupper($request->getMethod())) {
             return null;
         }
-        
-        $params = $request->getParsedBody();
-        $identity = $params['identity'] ?? null;
+
+        $params     = $request->getParsedBody();
+        $identity   = $params['identity'] ?? null;
         $credential = $params['credential'] ?? null;
         if (! $identity || ! $credential) {
             return null;
         }
-        
+
         $user = $this->userRepository->authenticate($identity, $credential);
         if (null !== $user) {
             $session->set(UserInterface::class, $user->getIdentity());
             $session->regenerate();
         }
         return $user;
-        
     }
 
     public function unauthorizedResponse(ServerRequestInterface $request): ResponseInterface
@@ -84,7 +84,7 @@ class Authentication implements AuthenticationInterface
             $session->regenerate();
         }
     }
-    
+
     private function createUserFromSession(SessionInterface $session): ?UserInterface
     {
         /** @var int $id */

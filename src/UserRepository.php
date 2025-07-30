@@ -9,9 +9,14 @@ use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Authentication\UserRepositoryInterface;
 
+use function array_shift;
+use function count;
+use function in_array;
+use function is_object;
+use function password_verify;
+
 class UserRepository implements UserRepositoryInterface
 {
-
     public function __construct(
         private UserMapperInterface $mapper,
         private Options $options,
@@ -24,7 +29,7 @@ class UserRepository implements UserRepositoryInterface
     public function authenticate(string $credential, ?string $password = null): ?UserInterface
     {
         $userObject = null;
-        $fields = $this->options->getAuthIdentityFields();
+        $fields     = $this->options->getAuthIdentityFields();
         while (! is_object($userObject) && count($fields) > 0) {
             $mode = array_shift($fields);
             switch ($mode) {
@@ -41,7 +46,7 @@ class UserRepository implements UserRepositoryInterface
         }
 
         if ($this->options->getEnableUserState()) {
-            if (!in_array($userObject->getState(), $this->getOptions()->getAllowedLoginStates())) {
+            if (! in_array($userObject->getState(), $this->getOptions()->getAllowedLoginStates())) {
                 return null;
             }
         }

@@ -11,7 +11,6 @@ use Psr\Container\ContainerInterface;
 
 class UserRepositoryFactory implements FactoryInterface
 {
-
     /**
      * @inheritDoc
      */

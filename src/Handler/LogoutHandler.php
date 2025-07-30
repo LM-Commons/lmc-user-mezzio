@@ -4,19 +4,16 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\Handler;
 
-use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Lmc\User\Mezzio\Authentication;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Helper\UrlHelper;
-use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class LogoutHandler implements RequestHandlerInterface
 {
-
     public function __construct(
         private Authentication $adapter,
         private Options $options,

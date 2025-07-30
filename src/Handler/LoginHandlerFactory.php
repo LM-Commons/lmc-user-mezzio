@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\Handler;
 
-use Laminas\Form\FormInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Authentication\AuthenticationInterface;
@@ -14,7 +13,6 @@ use Psr\Container\ContainerInterface;
 
 class LoginHandlerFactory implements FactoryInterface
 {
-
     /**
      * @inheritDoc
      */

@@ -10,7 +10,6 @@ use Psr\Container\ContainerInterface;
 
 class LoginFormFactory implements FactoryInterface
 {
-
     /**
      * @inheritDoc
      */

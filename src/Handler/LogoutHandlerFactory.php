@@ -12,7 +12,6 @@ use Psr\Container\ContainerInterface;
 
 class LogoutHandlerFactory implements FactoryInterface
 {
-
     /**
      * @inheritDoc
      */

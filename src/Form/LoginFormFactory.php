@@ -16,6 +16,8 @@ class LoginFormFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): LoginForm
     {
-        return new LoginForm(null, $container->get(Options::class));
+        $form = new LoginForm(null, $container->get(Options::class));
+        $form->setInputFilter(new LoginFilter($container->get(Options::class)));
+        return $form;
     }
 }

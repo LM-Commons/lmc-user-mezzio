@@ -8,8 +8,8 @@ use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Form\FormInterface;
+use Lmc\User\Mezzio\Authentication;
 use Lmc\User\Mezzio\Options\Options;
-use Mezzio\Authentication\AuthenticationInterface;
 use Mezzio\Helper\UrlHelper;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -20,7 +20,7 @@ class LoginHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $renderer,
-        private AuthenticationInterface $adapter,
+        private Authentication $adapter,
         private Options $options,
         private FormInterface $loginForm,
         private UrlHelper $urlHelper,
@@ -59,6 +59,35 @@ class LoginHandler implements RequestHandlerInterface
 
     private function handlePost(ServerRequestInterface $request): ResponseInterface
     {
+        if ($this->options->getLoginRedirectRoute()) {
+            $queryParams = $request->getQueryParams();
+            $redirect    = $queryParams['redirect'] ?? false;
+        } else {
+            $redirect = false;
+        }
+        $this->loginForm->setData($request->getParsedBody());
+        if (! $this->loginForm->isValid()) {
+            return new HtmlResponse($this->renderer->render(
+                'lmcuser::login',
+                [
+                    'loginForm'          => $this->loginForm,
+                    'redirect'           => $redirect,
+                    'enableRegistration' => $this->options->getEnableRegistration(),
+                ]
+            ));
+        }
+        $this->adapter->logout($request);
+        if (! $this->adapter->authenticate($request)) {
+            return new HtmlResponse($this->renderer->render(
+                'lmcuser::login',
+                [
+                    'loginForm'          => $this->loginForm,
+                    'redirect'           => $redirect,
+                    'enableRegistration' => $this->options->getEnableRegistration(),
+                ]
+            ));
+        }
+
         return new RedirectResponse(
             $this->urlHelper->generate($this->options->getLoginRedirectRoute())
         );

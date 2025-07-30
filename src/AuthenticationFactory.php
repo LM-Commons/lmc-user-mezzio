@@ -24,7 +24,8 @@ class AuthenticationFactory implements FactoryInterface
             $container->get(ResponseFactoryInterface::class),
             $container->get(Options::class),
             $container->get(UserMapperInterface::class),
-            $container->get(UserInterface::class)
+            $container->get(UserInterface::class),
+            $container->get(UserRepository::class)
         );
     }
 }

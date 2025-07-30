@@ -8,6 +8,7 @@ use Lmc\User\Common\Mapper\User;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Authentication\AuthenticationInterface;
 use Mezzio\Authentication\UserInterface;
+use Mezzio\Authentication\UserRepositoryInterface;
 use Mezzio\Helper\UrlHelperInterface;
 use Mezzio\Session\SessionInterface;
 use Mezzio\Session\SessionMiddleware;
@@ -26,7 +27,8 @@ class Authentication implements AuthenticationInterface
         private ResponseFactoryInterface $responseFactory,
         private Options                  $options,
         private readonly User            $mapper,
-        callable                         $userFactory
+        callable                         $userFactory,
+        private UserRepositoryInterface  $userRepository
     ) {
         $this->userFactory = static fn(string $identity, array $roles = [], array $details = []): UserInterface
         => $userFactory($identity, $roles, $details);
@@ -39,16 +41,28 @@ class Authentication implements AuthenticationInterface
             throw Exception\MissingSessionContainerException::create();
         }
 
-        if (! $session->has(UserInterface::class)) {
+        if ($session->has(UserInterface::class)) {
+            return $this->createUserFromSession($session);
+        }
+        
+        if ('POST' !== strtoupper($request->getMethod())) {
             return null;
         }
-        /** @var int $id */
-        $id   = $session->get(UserInterface::class);
-        $user = $this->mapper->findById($id);
-        if (! $user instanceof UserInterface) {
+        
+        $params = $request->getParsedBody();
+        $identity = $params['identity'] ?? null;
+        $credential = $params['credential'] ?? null;
+        if (! $identity || ! $credential) {
             return null;
         }
-        return ($this->userFactory)($user->getId(), $user->getRoles(), $user->getDetails());
+        
+        $user = $this->userRepository->authenticate($identity, $credential);
+        if (null !== $user) {
+            $session->set(UserInterface::class, $user->getIdentity());
+            $session->regenerate();
+        }
+        return $user;
+        
     }
 
     public function unauthorizedResponse(ServerRequestInterface $request): ResponseInterface
@@ -60,5 +74,25 @@ class Authentication implements AuthenticationInterface
                 'Location',
                 $this->urlHelper->generate($redirectRoute)
             );
+    }
+
+    public function logout(ServerRequestInterface $request): void
+    {
+        $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
+        if ($session instanceof SessionInterface) {
+            $session->clear();
+            $session->regenerate();
+        }
+    }
+    
+    private function createUserFromSession(SessionInterface $session): ?UserInterface
+    {
+        /** @var int $id */
+        $id   = $session->get(UserInterface::class);
+        $user = $this->mapper->findById((int) $id);
+        if (! $user instanceof UserInterface) {
+            return null;
+        }
+        return $user;
     }
 }

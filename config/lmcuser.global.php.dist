@@ -236,6 +236,13 @@ $settings = [
     //'table_name' => 'user',
 
     /**
+     * Base path for routes
+     * Defines the base path that will be added to the lmcuser route paths
+     * Defaulrs to ''
+     */
+    // 'base_path => '',
+
+    /**
      * End of LmcUser configuration
      */
 ];

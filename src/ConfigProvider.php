@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio;
 
-use Laminas\Router\Http\Literal;
 use Lmc\User\Mezzio\Form\LoginForm;
 use Lmc\User\Mezzio\Form\LoginFormFactory;
-use Lmc\User\Mezzio\Handler\LoginHandler;
-use Lmc\User\Mezzio\Handler\UserHandler;
+use Mezzio\Application;
 
 class ConfigProvider
 {
@@ -16,7 +14,6 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'routes'       => $this->getRouterConfig(),
             'templates'    => $this->getTemplates(),
         ];
     }
@@ -24,39 +21,21 @@ class ConfigProvider
     public function getDependencies(): array
     {
         return [
-            'aliases'   => [
+            'aliases'    => [
                 'lmcuser_login_form' => LoginForm::class,
             ],
-            'factories' => [
-                Authentication::class  => AuthenticationFactory::class,
-                UserRepository::class  => UserRepositoryFactory::class,
-                Options\Options::class => Options\OptionsFactory::class,
-                LoginHandler::class    => Handler\LoginHandlerFactory::class,
-                UserHandler::class     => Handler\UserHandlerFactory::class,
-                LoginForm::class       => LoginFormFactory::class,
+            'factories'  => [
+                Authentication::class        => AuthenticationFactory::class,
+                UserRepository::class        => UserRepositoryFactory::class,
+                Options\Options::class       => Options\OptionsFactory::class,
+                Handler\LoginHandler::class  => Handler\LoginHandlerFactory::class,
+                Handler\UserHandler::class   => Handler\UserHandlerFactory::class,
+                Handler\LogoutHandler::class => Handler\LogoutHandlerFactory::class,
+                LoginForm::class             => LoginFormFactory::class,
             ],
-        ];
-    }
-
-    public function getRouterConfig(): array
-    {
-        return [
-            'lmcuser'       => [
-                'methods'    => ['GET'],
-                'middleware' => [
-                    UserHandler::class,
-                ],
-                'path'       => '/user',
-                'type'       => Literal::class,
-                'options'    => [],
-            ],
-            'lmcuser.login' => [
-                'type'       => Literal::class,
-                'methods'    => ['GET', 'POST'],
-                'options'    => [],
-                'path'       => '/login',
-                'middleware' => [
-                    LoginHandler::class,
+            'delegators' => [
+                Application::class => [
+                    RoutesDelegator::class,
                 ],
             ],
         ];

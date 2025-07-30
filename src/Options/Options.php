@@ -6,6 +6,8 @@ namespace Lmc\User\Mezzio\Options;
 
 use Laminas\Stdlib\AbstractOptions;
 
+use function rtrim;
+
 class Options extends AbstractOptions
 {
     //phpcs:disable
@@ -15,7 +17,7 @@ class Options extends AbstractOptions
     protected bool $useRedirectParameterIfPresent = true;
     protected string $unauthorizedRedirectRoute   = 'lmcuser.login';
     protected string $loginRedirectRoute          = 'lmcuser';
-    protected string $logoutRedirectRoute         = 'lmcuser/login';
+    protected string $logoutRedirectRoute         = 'lmcuser.login';
     protected int $loginFormTimeout               = 300;
     protected int $userFormTimeout                = 300;
     protected bool $loginAfterRegistration        = true;
@@ -41,6 +43,7 @@ class Options extends AbstractOptions
             'timeout'    => 300,
         ],
     ];
+    protected string $basePath                    = '';
 
     public function setLoginRedirectRoute(string $loginRedirectRoute): self
     {
@@ -299,6 +302,17 @@ class Options extends AbstractOptions
     public function setUnauthorizedRedirectRoute(string $unauthorizedRedirectRoute): self
     {
         $this->unauthorizedRedirectRoute = $unauthorizedRedirectRoute;
+        return $this;
+    }
+
+    public function getBasePath(): string
+    {
+        return $this->basePath;
+    }
+
+    public function setBasePath(string $basePath): self
+    {
+        $this->basePath = rtrim($basePath, '/');
         return $this;
     }
 }

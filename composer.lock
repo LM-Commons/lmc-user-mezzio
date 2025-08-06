@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6711872db5df4c1a17ced5f50226a7b",
+    "content-hash": "0325d7cc58eeead7b6c5d910a81aab7f",
     "packages": [
         {
             "name": "dflydev/fig-cookies",
@@ -123,152 +123,6 @@
                 "source": "https://github.com/php-fig/http-message-util/tree/1.1.5"
             },
             "time": "2020-11-24T22:02:12+00:00"
-        },
-        {
-            "name": "laminas/laminas-authentication",
-            "version": "2.18.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-authentication.git",
-                "reference": "c1da3ec75bd4d6e3c63cf3a89f0f1a59a81a82bd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-authentication/zipball/c1da3ec75bd4d6e3c63cf3a89f0f1a59a81a82bd",
-                "reference": "c1da3ec75bd4d6e3c63cf3a89f0f1a59a81a82bd",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "laminas/laminas-stdlib": "^3.19.0",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
-            },
-            "conflict": {
-                "zendframework/zend-authentication": "*"
-            },
-            "require-dev": {
-                "laminas/laminas-coding-standard": "~2.5.0",
-                "laminas/laminas-db": "^2.20.0",
-                "laminas/laminas-http": "^2.19.0",
-                "laminas/laminas-ldap": "^2.18.1",
-                "laminas/laminas-session": "^2.21.0",
-                "laminas/laminas-uri": "^2.12.0",
-                "laminas/laminas-validator": "^2.64.1",
-                "phpunit/phpunit": "^9.6.20",
-                "psalm/plugin-phpunit": "^0.19.0",
-                "squizlabs/php_codesniffer": "^3.10.2",
-                "vimeo/psalm": "^5.26.0"
-            },
-            "suggest": {
-                "laminas/laminas-db": "Laminas\\Db component",
-                "laminas/laminas-http": "Laminas\\Http component",
-                "laminas/laminas-ldap": "Laminas\\Ldap component",
-                "laminas/laminas-session": "Laminas\\Session component",
-                "laminas/laminas-uri": "Laminas\\Uri component",
-                "laminas/laminas-validator": "Laminas\\Validator component"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Authentication\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "provides an API for authentication and includes concrete authentication adapters for common use case scenarios",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "Authentication",
-                "laminas"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-authentication/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-authentication/issues",
-                "rss": "https://github.com/laminas/laminas-authentication/releases.atom",
-                "source": "https://github.com/laminas/laminas-authentication"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2024-10-21T10:45:35+00:00"
-        },
-        {
-            "name": "laminas/laminas-db",
-            "version": "2.20.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-db.git",
-                "reference": "207b9ee70a8b518913c1fad688d7a64fe89a8b91"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-db/zipball/207b9ee70a8b518913c1fad688d7a64fe89a8b91",
-                "reference": "207b9ee70a8b518913c1fad688d7a64fe89a8b91",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-stdlib": "^3.7.1",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
-            },
-            "conflict": {
-                "zendframework/zend-db": "*"
-            },
-            "require-dev": {
-                "laminas/laminas-coding-standard": "^2.4.0",
-                "laminas/laminas-eventmanager": "^3.6.0",
-                "laminas/laminas-hydrator": "^4.7",
-                "laminas/laminas-servicemanager": "^3.19.0",
-                "phpunit/phpunit": "^9.5.25"
-            },
-            "suggest": {
-                "laminas/laminas-eventmanager": "Laminas\\EventManager component",
-                "laminas/laminas-hydrator": "(^3.2 || ^4.3) Laminas\\Hydrator component for using HydratingResultSets",
-                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
-            },
-            "type": "library",
-            "extra": {
-                "laminas": {
-                    "component": "Laminas\\Db",
-                    "config-provider": "Laminas\\Db\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Db\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Database abstraction layer, SQL abstraction, result set abstraction, and RowDataGateway and TableDataGateway implementations",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "db",
-                "laminas"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-db/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-db/issues",
-                "rss": "https://github.com/laminas/laminas-db/releases.atom",
-                "source": "https://github.com/laminas/laminas-db"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2024-04-02T01:04:56+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
@@ -418,74 +272,6 @@
                 }
             ],
             "time": "2025-05-06T19:29:36+00:00"
-        },
-        {
-            "name": "laminas/laminas-eventmanager",
-            "version": "3.14.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-eventmanager.git",
-                "reference": "1837cafaaaee74437f6d8ec9ff7da03e6f81d809"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-eventmanager/zipball/1837cafaaaee74437f6d8ec9ff7da03e6f81d809",
-                "reference": "1837cafaaaee74437f6d8ec9ff7da03e6f81d809",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
-            },
-            "conflict": {
-                "container-interop/container-interop": "<1.2",
-                "zendframework/zend-eventmanager": "*"
-            },
-            "require-dev": {
-                "laminas/laminas-coding-standard": "~3.0.0",
-                "laminas/laminas-stdlib": "^3.20",
-                "phpbench/phpbench": "^1.3.1",
-                "phpunit/phpunit": "^10.5.38",
-                "psalm/plugin-phpunit": "^0.19.0",
-                "psr/container": "^1.1.2 || ^2.0.2",
-                "vimeo/psalm": "^5.26.1"
-            },
-            "suggest": {
-                "laminas/laminas-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature",
-                "psr/container": "^1.1.2 || ^2.0.2, to use the lazy listeners feature"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\EventManager\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Trigger and listen to events within a PHP application",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "event",
-                "eventmanager",
-                "events",
-                "laminas"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-eventmanager/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-eventmanager/issues",
-                "rss": "https://github.com/laminas/laminas-eventmanager/releases.atom",
-                "source": "https://github.com/laminas/laminas-eventmanager"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2024-11-21T11:31:22+00:00"
         },
         {
             "name": "laminas/laminas-filter",
@@ -1159,89 +945,6 @@
             "time": "2024-10-28T21:32:16+00:00"
         },
         {
-            "name": "laminas/laminas-session",
-            "version": "2.24.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-session.git",
-                "reference": "487b6debacd3e029e27cbed7ce495b1328908dab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-session/zipball/487b6debacd3e029e27cbed7ce495b1328908dab",
-                "reference": "487b6debacd3e029e27cbed7ce495b1328908dab",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-eventmanager": "^3.12",
-                "laminas/laminas-servicemanager": "^3.22",
-                "laminas/laminas-stdlib": "^3.18",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
-            },
-            "conflict": {
-                "amphp/amp": "<2.6.4",
-                "zendframework/zend-session": "*"
-            },
-            "require-dev": {
-                "ext-xdebug": "*",
-                "laminas/laminas-cache": "^3.12.2",
-                "laminas/laminas-cache-storage-adapter-memory": "^2.3",
-                "laminas/laminas-coding-standard": "~3.0.1",
-                "laminas/laminas-db": "^2.20.0",
-                "laminas/laminas-http": "^2.20",
-                "laminas/laminas-validator": "^2.64.1",
-                "mongodb/mongodb": "~1.20.0",
-                "phpunit/phpunit": "^10.5.38",
-                "psalm/plugin-phpunit": "^0.19.0",
-                "vimeo/psalm": "^5.26.1"
-            },
-            "suggest": {
-                "laminas/laminas-cache": "Laminas\\Cache component",
-                "laminas/laminas-db": "Laminas\\Db component",
-                "laminas/laminas-http": "Laminas\\Http component",
-                "laminas/laminas-servicemanager": "Laminas\\ServiceManager component",
-                "laminas/laminas-validator": "Laminas\\Validator component",
-                "mongodb/mongodb": "If you want to use the MongoDB session save handler"
-            },
-            "type": "library",
-            "extra": {
-                "laminas": {
-                    "component": "Laminas\\Session",
-                    "config-provider": "Laminas\\Session\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Session\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Object-oriented interface to PHP sessions and storage",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "laminas",
-                "session"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-session/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-session/issues",
-                "rss": "https://github.com/laminas/laminas-session/releases.atom",
-                "source": "https://github.com/laminas/laminas-session"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2025-02-05T10:39:08+00:00"
-        },
-        {
             "name": "laminas/laminas-stdlib",
             "version": "3.20.0",
             "source": {
@@ -1448,7 +1151,7 @@
             "source": {
                 "type": "git",
                 "url": "c:/lm-commons/lmc-authentication",
-                "reference": "d18c7f962b95b9ae96b4cd09708a1ff9a23aace8"
+                "reference": "98a47ac529b67c52f0e5577a1a973083ecb60cda"
             },
             "require": {
                 "laminas/laminas-servicemanager": "^3.15 || ^4.0",
@@ -1519,94 +1222,7 @@
                 "laminas",
                 "mezzio"
             ],
-            "time": "2025-08-06T14:28:48+00:00"
-        },
-        {
-            "name": "lm-commons/lmc-user-common",
-            "version": "1.0.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/LM-Commons/LmcUserCommon.git",
-                "reference": "a47cf381fa931557aeab37ecf17986511a50c1a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/LM-Commons/LmcUserCommon/zipball/a47cf381fa931557aeab37ecf17986511a50c1a0",
-                "reference": "a47cf381fa931557aeab37ecf17986511a50c1a0",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-authentication": "^2.9",
-                "laminas/laminas-db": "^2.13",
-                "laminas/laminas-eventmanager": "^3.4",
-                "laminas/laminas-hydrator": "^4.3",
-                "laminas/laminas-servicemanager": "^3.8 || ^4.2",
-                "laminas/laminas-session": "^2.12",
-                "php": "~8.2.0 || ~8.3.0 || ~8.4.0"
-            },
-            "require-dev": {
-                "laminas/laminas-coding-standard": "^3.0",
-                "phpunit/phpunit": "^11.5",
-                "psalm/plugin-phpunit": "^0.19",
-                "vimeo/psalm": "^6.0"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laminas": {
-                    "component": "Lmc\\User\\Common",
-                    "config-provider": "Lmc\\User\\Common\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lmc\\User\\Common\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "LmcTest\\User\\Common\\": "test/"
-                }
-            },
-            "scripts": {
-                "check": [
-                    "@cs-check",
-                    "@test"
-                ],
-                "test": [
-                    "phpunit"
-                ],
-                "test-coverage": [
-                    "phpunit --coverage-clover ./build/logs/clover.xml"
-                ],
-                "cs-check": [
-                    "phpcs"
-                ],
-                "cs-fix": [
-                    "phpcbf"
-                ],
-                "test-coverage-html": [
-                    "phpunit --coverage-html ./build/html"
-                ],
-                "static-analysis": [
-                    "psalm --shepherd --stats"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric Richer",
-                    "email": "eric.richer@vistoconsulting.com"
-                }
-            ],
-            "description": "Common libraries for LmcUser components",
-            "support": {
-                "source": "https://github.com/LM-Commons/LmcUserCommon/tree/1.0.x",
-                "issues": "https://github.com/LM-Commons/LmcUserCommon/issues"
-            },
-            "time": "2025-07-30T22:00:28+00:00"
+            "time": "2025-08-06T15:48:02+00:00"
         },
         {
             "name": "lm-commons/lmc-user-repository",
@@ -1614,7 +1230,7 @@
             "source": {
                 "type": "git",
                 "url": "c:/lm-commons/lmc-user-repository",
-                "reference": "8a74ea3fb2c93c3fd2171b29f4efb44d7e6788c6"
+                "reference": "6b7f7bf49436ab00df4df28beb7384aa91cb3ca8"
             },
             "require": {
                 "lm-commons/lmc-authentication": "1.0.x-dev",
@@ -1628,11 +1244,6 @@
             },
             "default-branch": true,
             "type": "library",
-            "extra": {
-                "laminas": {
-                    "config-provider": "Lmc\\User\\Repository\\ConfigProvider"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Lmc\\User\\Repository\\": "src/"
@@ -1677,87 +1288,7 @@
                 }
             ],
             "description": "Lmc User Repository Common",
-            "time": "2025-08-06T02:14:57+00:00"
-        },
-        {
-            "name": "mezzio/mezzio-authentication",
-            "version": "1.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mezzio/mezzio-authentication.git",
-                "reference": "9aa6602d186ba68411b0e7ca6960f24c4089b74e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-authentication/zipball/9aa6602d186ba68411b0e7ca6960f24c4089b74e",
-                "reference": "9aa6602d186ba68411b0e7ca6960f24c4089b74e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
-                "psr/container": "^1.0 || ^2.0",
-                "psr/http-message": "^1.0.1 || ^2.0.0",
-                "psr/http-server-middleware": "^1.0",
-                "webmozart/assert": "^1.11.0"
-            },
-            "conflict": {
-                "container-interop/container-interop": "<1.2.0",
-                "zendframework/zend-expressive-authentication": "*"
-            },
-            "require-dev": {
-                "ext-sqlite3": "*",
-                "laminas/laminas-coding-standard": "~3.0.1",
-                "phpunit/phpunit": "^10.5.45",
-                "psalm/plugin-phpunit": "^0.19.5",
-                "vimeo/psalm": "^6.10.1"
-            },
-            "suggest": {
-                "ext-pdo": "*: for use with the PDO-backed UserRepositoryInterface implementation",
-                "mezzio/mezzio-authentication-basic": "Provides an HTTP Basic Authentication AuthenticationInterface implementation",
-                "mezzio/mezzio-authentication-laminasauthentication": "Provides a laminas-authentication AuthenticationInterface implementation",
-                "mezzio/mezzio-authentication-session": "Provides a username/password + session AuthenticationInterface implementation"
-            },
-            "type": "library",
-            "extra": {
-                "laminas": {
-                    "config-provider": "Mezzio\\Authentication\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Mezzio\\Authentication\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Authentication middleware for Mezzio and PSR-7 applications",
-            "homepage": "https://mezzio.dev",
-            "keywords": [
-                "Authentication",
-                "http",
-                "laminas",
-                "mezzio",
-                "middleware",
-                "psr-15",
-                "psr-7"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.mezzio.dev/mezzio-authentication/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/mezzio/mezzio-authentication/issues",
-                "rss": "https://github.com/mezzio/mezzio-authentication/releases.atom",
-                "source": "https://github.com/mezzio/mezzio-authentication"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2025-04-29T09:17:58+00:00"
+            "time": "2025-08-06T15:39:36+00:00"
         },
         {
             "name": "mezzio/mezzio-helpers",
@@ -7801,7 +7332,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "lm-commons/lmc-authentication": 20,
-        "lm-commons/lmc-user-common": 20,
         "lm-commons/lmc-user-repository": 20
     },
     "prefer-stable": false,

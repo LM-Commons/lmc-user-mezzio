@@ -26,7 +26,7 @@ class LogoutHandler implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $this->adapter->logout($request);
+        $this->adapter->reset($request);
         return new RedirectResponse(
             $this->urlHelper->generate(
                 $this->options->getLogoutRedirectRoute(),

@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Lmc\User\Mezzio\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
-use Mezzio\Authentication\UserInterface;
+use Lmc\Authentication\UserInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class UserHandler implements RequestHandlerInterface
+readonly class UserHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $renderer,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\Exception;
 
-use Mezzio\Authentication\AuthenticationMiddleware;
+use Lmc\Authentication\AuthenticationMiddleware;
 use Mezzio\Session\SessionMiddleware;
 use RuntimeException;
 

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Lmc\User\Mezzio\Handler;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Lmc\Authentication\AuthenticationInterface;
 use Lmc\User\Mezzio\Options\Options;
-use Mezzio\Authentication\AuthenticationInterface;
 use Mezzio\Helper\UrlHelper;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;

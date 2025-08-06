@@ -4,35 +4,21 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio;
 
-use Lmc\User\Common\Mapper\User;
-use Lmc\User\Mezzio\Options\Options;
-use Mezzio\Authentication\AuthenticationInterface;
-use Mezzio\Authentication\UserInterface;
-use Mezzio\Authentication\UserRepositoryInterface;
-use Mezzio\Helper\UrlHelperInterface;
+use Lmc\Authentication\AuthenticationInterface;
+use Lmc\Authentication\UserInterface;
+use Lmc\User\Repository\AdapterInterface;
 use Mezzio\Session\SessionInterface;
 use Mezzio\Session\SessionMiddleware;
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 use function strtoupper;
 
-class Authentication implements AuthenticationInterface
+final readonly class Authentication implements AuthenticationInterface
 {
-    /** @var callable */
-    private $userFactory;
-
     public function __construct(
-        private UrlHelperInterface $urlHelper,
-        private ResponseFactoryInterface $responseFactory,
-        private Options $options,
-        private readonly User $mapper,
-        callable $userFactory,
-        private UserRepositoryInterface $userRepository
+        private AdapterInterface $userAdapter,
+        private UserRepository $userRepository,
     ) {
-        $this->userFactory = static fn(string $identity, array $roles = [], array $details = []): UserInterface
-        => $userFactory($identity, $roles, $details);
     }
 
     public function authenticate(ServerRequestInterface $request): ?UserInterface
@@ -65,18 +51,7 @@ class Authentication implements AuthenticationInterface
         return $user;
     }
 
-    public function unauthorizedResponse(ServerRequestInterface $request): ResponseInterface
-    {
-        $redirectRoute = $this->options->getUnauthorizedRedirectRoute();
-        return $this->responseFactory
-            ->createResponse(302)
-            ->withHeader(
-                'Location',
-                $this->urlHelper->generate($redirectRoute)
-            );
-    }
-
-    public function logout(ServerRequestInterface $request): void
+    public function reset(ServerRequestInterface $request): void
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
         if ($session instanceof SessionInterface) {
@@ -89,7 +64,7 @@ class Authentication implements AuthenticationInterface
     {
         /** @var int $id */
         $id   = $session->get(UserInterface::class);
-        $user = $this->mapper->findById((int) $id);
+        $user = $this->userAdapter->findById($id);
         if (! $user instanceof UserInterface) {
             return null;
         }

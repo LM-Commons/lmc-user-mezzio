@@ -76,7 +76,7 @@ class LoginHandler implements RequestHandlerInterface
                 ]
             ));
         }
-        $this->adapter->logout($request);
+        $this->adapter->reset($request);
         if (! $this->adapter->authenticate($request)) {
             return new HtmlResponse($this->renderer->render(
                 'lmcuser::login',

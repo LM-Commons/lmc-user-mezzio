@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b9246e7638337abe463816d230688fe",
+    "content-hash": "f6711872db5df4c1a17ced5f50226a7b",
     "packages": [
         {
             "name": "dflydev/fig-cookies",
@@ -1443,17 +1443,96 @@
             "time": "2025-06-16T14:38:00+00:00"
         },
         {
+            "name": "lm-commons/lmc-authentication",
+            "version": "1.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "c:/lm-commons/lmc-authentication",
+                "reference": "d18c7f962b95b9ae96b4cd09708a1ff9a23aace8"
+            },
+            "require": {
+                "laminas/laminas-servicemanager": "^3.15 || ^4.0",
+                "laminas/laminas-stdlib": "^3.1",
+                "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
+                "psr/http-message": "^1.0.1 || ^2.0",
+                "psr/http-server-middleware": "^1.0"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "^3.0",
+                "phpunit/phpunit": "^11.0",
+                "psalm/plugin-phpunit": "^0.19.0",
+                "vimeo/psalm": "^6.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laminas": {
+                    "config-provider": "Lmc\\Authentication\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lmc\\Authentication\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LmcTest\\Authentication\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "phpunit --coverage-clover ./build/logs/clover.xml"
+                ],
+                "test-coverage-html": [
+                    "phpunit --colors=always --coverage-html ./build/html"
+                ],
+                "static-analysis": [
+                    "psalm --shepherd --stats"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Richer",
+                    "email": "eric.richer@vistoconsulting.com"
+                }
+            ],
+            "description": "Laminas Mezzio Authentication",
+            "keywords": [
+                "authentication",
+                "laminas",
+                "mezzio"
+            ],
+            "time": "2025-08-06T14:28:48+00:00"
+        },
+        {
             "name": "lm-commons/lmc-user-common",
             "version": "1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LM-Commons/LmcUserCommon.git",
-                "reference": "591087e0905d5c82ba0f06b2f2e9043ce7f5c289"
+                "reference": "a47cf381fa931557aeab37ecf17986511a50c1a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LM-Commons/LmcUserCommon/zipball/591087e0905d5c82ba0f06b2f2e9043ce7f5c289",
-                "reference": "591087e0905d5c82ba0f06b2f2e9043ce7f5c289",
+                "url": "https://api.github.com/repos/LM-Commons/LmcUserCommon/zipball/a47cf381fa931557aeab37ecf17986511a50c1a0",
+                "reference": "a47cf381fa931557aeab37ecf17986511a50c1a0",
                 "shasum": ""
             },
             "require": {
@@ -1527,7 +1606,78 @@
                 "source": "https://github.com/LM-Commons/LmcUserCommon/tree/1.0.x",
                 "issues": "https://github.com/LM-Commons/LmcUserCommon/issues"
             },
-            "time": "2025-07-29T16:42:23+00:00"
+            "time": "2025-07-30T22:00:28+00:00"
+        },
+        {
+            "name": "lm-commons/lmc-user-repository",
+            "version": "1.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "c:/lm-commons/lmc-user-repository",
+                "reference": "8a74ea3fb2c93c3fd2171b29f4efb44d7e6788c6"
+            },
+            "require": {
+                "lm-commons/lmc-authentication": "1.0.x-dev",
+                "php": "~8.2.0 || ~8.3.0 || ~8.4.0"
+            },
+            "require-dev": {
+                "laminas/laminas-coding-standard": "^3.0",
+                "phpunit/phpunit": "^11.5",
+                "psalm/plugin-phpunit": "^0.19",
+                "vimeo/psalm": "^6.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laminas": {
+                    "config-provider": "Lmc\\User\\Repository\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lmc\\User\\Repository\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "LmcTest\\User\\Repository\\": "test/"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "@cs-check",
+                    "@test"
+                ],
+                "test": [
+                    "phpunit"
+                ],
+                "test-coverage": [
+                    "phpunit --coverage-clover ./build/logs/clover.xml"
+                ],
+                "cs-check": [
+                    "phpcs"
+                ],
+                "cs-fix": [
+                    "phpcbf"
+                ],
+                "test-coverage-html": [
+                    "phpunit --coverage-html ./build/html"
+                ],
+                "static-analysis": [
+                    "psalm --shepherd --stats"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Richer",
+                    "email": "eric.richer@vistoconsulting.com"
+                }
+            ],
+            "description": "Lmc User Repository Common",
+            "time": "2025-08-06T02:14:57+00:00"
         },
         {
             "name": "mezzio/mezzio-authentication",
@@ -4281,16 +4431,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.13.3",
+            "version": "1.13.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "faed855a7b5f4d4637717c2b3863e277116beb36"
+                "reference": "07d290f0c47959fd5eed98c95ee5602db07e0b6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/faed855a7b5f4d4637717c2b3863e277116beb36",
-                "reference": "faed855a7b5f4d4637717c2b3863e277116beb36",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/07d290f0c47959fd5eed98c95ee5602db07e0b6a",
+                "reference": "07d290f0c47959fd5eed98c95ee5602db07e0b6a",
                 "shasum": ""
             },
             "require": {
@@ -4329,7 +4479,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.3"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.4"
             },
             "funding": [
                 {
@@ -4337,7 +4487,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-05T12:25:42+00:00"
+            "time": "2025-08-01T08:46:24+00:00"
         },
         {
             "name": "netresearch/jsonmapper",
@@ -5125,16 +5275,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.27",
+            "version": "11.5.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "446d43867314781df7e9adf79c3ec7464956fd8f"
+                "reference": "93f30aa3889e785ac63493d4976df0ae9fdecb60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/446d43867314781df7e9adf79c3ec7464956fd8f",
-                "reference": "446d43867314781df7e9adf79c3ec7464956fd8f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/93f30aa3889e785ac63493d4976df0ae9fdecb60",
+                "reference": "93f30aa3889e785ac63493d4976df0ae9fdecb60",
                 "shasum": ""
             },
             "require": {
@@ -5206,7 +5356,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.27"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.28"
             },
             "funding": [
                 {
@@ -5230,7 +5380,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-11T04:10:06+00:00"
+            "time": "2025-07-31T07:10:28+00:00"
         },
         {
             "name": "psalm/plugin-phpunit",
@@ -6621,16 +6771,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v7.3.1",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "9e27aecde8f506ba0fd1d9989620c04a87697101"
+                "reference": "5f360ebc65c55265a74d23d7fe27f957870158a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/9e27aecde8f506ba0fd1d9989620c04a87697101",
-                "reference": "9e27aecde8f506ba0fd1d9989620c04a87697101",
+                "url": "https://api.github.com/repos/symfony/console/zipball/5f360ebc65c55265a74d23d7fe27f957870158a1",
+                "reference": "5f360ebc65c55265a74d23d7fe27f957870158a1",
                 "shasum": ""
             },
             "require": {
@@ -6695,7 +6845,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v7.3.1"
+                "source": "https://github.com/symfony/console/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -6707,11 +6857,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-27T19:55:54+00:00"
+            "time": "2025-07-30T17:13:41+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -6782,16 +6936,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v7.3.0",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "b8dce482de9d7c9fe2891155035a7248ab5c7fdb"
+                "reference": "edcbb768a186b5c3f25d0643159a787d3e63b7fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b8dce482de9d7c9fe2891155035a7248ab5c7fdb",
-                "reference": "b8dce482de9d7c9fe2891155035a7248ab5c7fdb",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/edcbb768a186b5c3f25d0643159a787d3e63b7fd",
+                "reference": "edcbb768a186b5c3f25d0643159a787d3e63b7fd",
                 "shasum": ""
             },
             "require": {
@@ -6828,7 +6982,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v7.3.0"
+                "source": "https://github.com/symfony/filesystem/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -6840,11 +6994,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-25T15:15:23+00:00"
+            "time": "2025-07-07T08:17:47+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -7326,16 +7484,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v7.3.0",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "f3570b8c61ca887a9e2938e85cb6458515d2b125"
+                "reference": "42f505aff654e62ac7ac2ce21033818297ca89ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/f3570b8c61ca887a9e2938e85cb6458515d2b125",
-                "reference": "f3570b8c61ca887a9e2938e85cb6458515d2b125",
+                "url": "https://api.github.com/repos/symfony/string/zipball/42f505aff654e62ac7ac2ce21033818297ca89ca",
+                "reference": "42f505aff654e62ac7ac2ce21033818297ca89ca",
                 "shasum": ""
             },
             "require": {
@@ -7393,7 +7551,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v7.3.0"
+                "source": "https://github.com/symfony/string/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -7405,11 +7563,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-20T20:19:01+00:00"
+            "time": "2025-07-10T08:47:49+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -7638,7 +7800,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "lm-commons/lmc-user-common": 20
+        "lm-commons/lmc-authentication": 20,
+        "lm-commons/lmc-user-common": 20,
+        "lm-commons/lmc-user-repository": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

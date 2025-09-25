@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio;
 
-use Laminas\ServiceManager\Factory\FactoryInterface;
 use Lmc\User\Mezzio\Options\Options;
 use Lmc\User\Repository\AdapterInterface;
 use Psr\Container\ContainerInterface;
 
-class UserRepositoryFactory implements FactoryInterface
+class UserRepositoryFactory
 {
-    /**
-     * @inheritDoc
-     */
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): UserRepository
+    public function __invoke(ContainerInterface $container): UserRepository
     {
         return new UserRepository(
             $container->get(AdapterInterface::class),

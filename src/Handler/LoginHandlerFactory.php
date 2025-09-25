@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\Handler;
 
-use Laminas\ServiceManager\Factory\FactoryInterface;
 use Lmc\Authentication\AuthenticationInterface;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Helper\UrlHelper;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 
-class LoginHandlerFactory implements FactoryInterface
+class LoginHandlerFactory
 {
-    /**
-     * @inheritDoc
-     */
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
+    public function __invoke(ContainerInterface $container): LoginHandler
     {
         return new LoginHandler(
             $container->get(TemplateRendererInterface::class),

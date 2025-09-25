@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio;
 
-use Laminas\ServiceManager\Factory\FactoryInterface;
 use Lmc\User\Repository\AdapterInterface;
 use Psr\Container\ContainerInterface;
 
-class AuthenticationFactory implements FactoryInterface
+class AuthenticationFactory
 {
-    /**
-     * @inheritDoc
-     */
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): Authentication
+    public function __invoke(ContainerInterface $container): Authentication
     {
         return new Authentication(
             $container->get(AdapterInterface::class),

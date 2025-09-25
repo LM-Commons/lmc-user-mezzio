@@ -31,6 +31,19 @@ final readonly class Authentication implements AuthenticationInterface
         if ($session->has(UserInterface::class)) {
             return $this->createUserFromSession($session);
         }
+        return null;
+    }
+
+    public function prepareForAuthentication(ServerRequestInterface $request): UserInterface|int|null
+    {
+        $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
+        if (! $session instanceof SessionInterface) {
+            throw Exception\MissingSessionContainerException::create();
+        }
+
+        if ($session->has(UserInterface::class)) {
+            return $this->createUserFromSession($session);
+        }
 
         if ('POST' !== strtoupper($request->getMethod())) {
             return null;
@@ -44,7 +57,7 @@ final readonly class Authentication implements AuthenticationInterface
         }
 
         $user = $this->userRepository->authenticate($identity, $credential);
-        if (null !== $user) {
+        if ($user instanceof UserInterface) {
             $session->set(UserInterface::class, $user->getIdentity());
             $session->regenerate();
         }

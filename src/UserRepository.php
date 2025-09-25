@@ -16,13 +16,17 @@ use function password_verify;
 
 readonly class UserRepository
 {
+    public const USER_NOT_FOUND      = 0;
+    public const USER_NOT_ALLOWED    = 1;
+    public const INVALID_CREDENTIALS = 2;
+
     public function __construct(
         private AdapterInterface $adapter,
         private Options $options,
     ) {
     }
 
-    public function authenticate(string $credential, ?string $password = null): ?UserInterface
+    public function authenticate(string $credential, ?string $password = null): UserInterface|int
     {
         $userObject = null;
         $fields     = $this->options->getAuthIdentityFields();
@@ -38,16 +42,16 @@ readonly class UserRepository
             }
         }
         if (null === $userObject) {
-            return null;
+            return self::USER_NOT_FOUND;
         }
 
         if ($this->options->getEnableUserState()) {
             if (! in_array($userObject->getState(), $this->options->getAllowedLoginStates())) {
-                return null;
+                return self::USER_NOT_ALLOWED;
             }
         }
         if (! password_verify($password, $userObject->getPassword())) {
-            return null;
+            return self::INVALID_CREDENTIALS;
         }
         return $userObject;
     }

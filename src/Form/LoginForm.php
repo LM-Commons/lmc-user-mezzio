@@ -16,9 +16,9 @@ class LoginForm extends Form
      * @param string|null $name
      */
     //phpcs:disable
-    public function __construct($name = null, Options $options)
+    public function __construct($name = 'login-form', Options $options)
     {
-        parent::__construct('login');
+        parent::__construct($name);
         $this->add([
             'name'    => 'identity',
             'type'    => Text::class,

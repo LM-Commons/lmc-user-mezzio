@@ -8,6 +8,7 @@ use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Form\FormInterface;
+use Lmc\Authentication\UserInterface;
 use Lmc\User\Mezzio\Authentication;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Helper\UrlHelper;
@@ -77,13 +78,15 @@ class LoginHandler implements RequestHandlerInterface
             ));
         }
         $this->adapter->reset($request);
-        if (! $this->adapter->authenticate($request)) {
+        $result = $this->adapter->prepareForAuthentication($request);
+        if (! $result instanceof UserInterface) {
             return new HtmlResponse($this->renderer->render(
                 'lmcuser::login',
                 [
                     'loginForm'          => $this->loginForm,
                     'redirect'           => $redirect,
                     'enableRegistration' => $this->options->getEnableRegistration(),
+                    'error'              => $result,
                 ]
             ));
         }

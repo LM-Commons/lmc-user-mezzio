@@ -6,6 +6,7 @@ namespace Lmc\User\Mezzio\Options;
 
 use Laminas\Stdlib\AbstractOptions;
 
+use function array_merge;
 use function rtrim;
 
 class Options extends AbstractOptions
@@ -44,6 +45,11 @@ class Options extends AbstractOptions
         ],
     ];
     protected string $basePath                    = '';
+
+    protected array $templateMap = [
+        'login' => 'lmcuser::login',
+        'user'  => 'lmcuser::user',
+    ];
 
     public function setLoginRedirectRoute(string $loginRedirectRoute): self
     {
@@ -314,5 +320,21 @@ class Options extends AbstractOptions
     {
         $this->basePath = rtrim($basePath, '/');
         return $this;
+    }
+
+    public function setTemplateMap(array $templateMap): self
+    {
+        $this->templateMap = array_merge($this->templateMap, $templateMap);
+        return $this;
+    }
+
+    public function getTemplateMap(): array
+    {
+        return $this->templateMap;
+    }
+
+    public function getTemplate(string $templateName): ?string
+    {
+        return $this->templateMap[$templateName] ?? null;
     }
 }

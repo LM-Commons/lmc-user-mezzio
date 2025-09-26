@@ -81,7 +81,7 @@ class LoginHandler implements RequestHandlerInterface
         $result = $this->adapter->prepareForAuthentication($request);
         if (! $result instanceof UserInterface) {
             return new HtmlResponse($this->renderer->render(
-                'lmcuser::login',
+                $this->options->getTemplate('login'),
                 [
                     'loginForm'          => $this->loginForm,
                     'redirect'           => $redirect,

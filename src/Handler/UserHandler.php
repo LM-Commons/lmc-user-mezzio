@@ -6,6 +6,7 @@ namespace Lmc\User\Mezzio\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use Lmc\Authentication\UserInterface;
+use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,6 +16,7 @@ readonly class UserHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $renderer,
+        private Options $options,
     ) {
     }
 
@@ -25,7 +27,7 @@ readonly class UserHandler implements RequestHandlerInterface
     {
         $user = $request->getAttribute(UserInterface::class);
         return new HtmlResponse($this->renderer->render(
-            'lmcuser::user',
+            $this->options->getTemplate('user'),
             [
                 'user' => $user,
             ]

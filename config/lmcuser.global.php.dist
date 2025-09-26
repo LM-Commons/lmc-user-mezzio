@@ -243,6 +243,16 @@ $settings = [
     // 'base_path => '',
 
     /**
+     * Template map
+     * Defines the template map to be used by the handler
+     * Defaults to [
+     *  'login' => 'lmcuser::login',
+     *  'user'  => 'lmcuser::user'
+     * ]
+     */
+    // 'template_map => [],
+
+    /**
      * End of LmcUser configuration
      */
 ];

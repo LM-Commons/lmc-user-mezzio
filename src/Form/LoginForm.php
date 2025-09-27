@@ -34,6 +34,17 @@ class LoginForm extends Form
             ],
             'attributes' => [],
         ]);
+        if ($options->getUseLoginFormCsrf()) {
+            $this->add([
+                'type' => '\Laminas\Form\Element\Csrf',
+                'name' => 'security',
+                'options' => [
+                    'csrf_options' => [
+                        'timeout' => $options->getLoginFormTimeout()
+                    ]
+                ]
+            ]);
+        }
         $this->add([
             'name'       => 'submit',
             'type'       => Button::class,

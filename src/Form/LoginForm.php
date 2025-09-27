@@ -38,7 +38,7 @@ class LoginForm extends Form
             'name'       => 'submit',
             'type'       => Button::class,
             'options'    => [
-                'label' => 'Login',
+                'label' => 'Sign In',
             ],
             'attributes' => [
                 'type' => 'submit',

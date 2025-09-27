@@ -49,7 +49,7 @@ class LoginHandler implements RequestHandlerInterface
             $redirect = false;
         }
         return new HtmlResponse($this->renderer->render(
-            'lmcuser::login',
+            $this->options->getTemplate('login'),
             [
                 'loginForm'          => $this->loginForm,
                 'redirect'           => $redirect,
@@ -69,7 +69,7 @@ class LoginHandler implements RequestHandlerInterface
         $this->loginForm->setData($request->getParsedBody());
         if (! $this->loginForm->isValid()) {
             return new HtmlResponse($this->renderer->render(
-                'lmcuser::login',
+                $this->options->getTemplate('login'),
                 [
                     'loginForm'          => $this->loginForm,
                     'redirect'           => $redirect,

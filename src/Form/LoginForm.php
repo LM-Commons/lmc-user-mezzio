@@ -26,6 +26,15 @@ class LoginForm extends Form
                 'label' => 'Username',
             ],
         ]);
+
+        $emailElement = $this->get('identity');
+        $label = $emailElement->getLabel('label');
+        // @TODO: make translation-friendly
+        foreach ($options->getAuthIdentityFields() as $mode) {
+            $label = (!empty($label) ? $label . ' or ' : '') . ucfirst($mode);
+        }
+        $emailElement->setLabel($label);
+
         $this->add([
             'name'       => 'credential',
             'type'       => Password::class,

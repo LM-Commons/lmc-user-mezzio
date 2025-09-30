@@ -1,31 +1,52 @@
 {
-  "name": "lm-commons/repository-template",
-  "description": "Repository template",
+  "name": "lm-commons/lmc-user-mezzio",
+  "description": "LmcUser for Mezzio",
   "license": "MIT",
   "authors": [
     {
-      "name": "Firstname Lastname",
-      "email": "email@example.com"
+      "name": "Eric Richer",
+      "email": "eric.richer@vistoconsulting.com"
     }
   ],
   "require": {
-    "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
+    "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
+    "laminas/laminas-eventmanager": "^3.10",
+    "laminas/laminas-servicemanager": "^3.20 || ^4.2",
+    "lm-commons/lmc-authentication": "1.0.x-dev",
+    "lm-commons/lmc-user-repository": "1.0.x-dev",
+    "psr/http-factory": "^1.0",
+    "mezzio/mezzio-template": "^2.1",
+    "mezzio/mezzio-helpers": "^5.18",
+    "mezzio/mezzio-session": "^1.16",
+    "mezzio/mezzio-laminasrouter": "^3.0",
+    "laminas/laminas-form": "^3.21"
   },
   "require-dev": {
-    "laminas/laminas-coding-standard": "^2.5",
-    "phpunit/phpunit": "^10.5",
+    "laminas/laminas-coding-standard": "^3.1",
+    "mezzio/mezzio": "^3.0",
+    "phpunit/phpunit": "^11.5 || ^12.1",
     "psalm/plugin-phpunit": "^0.19",
-    "vimeo/psalm": "^5.25"
+    "vimeo/psalm": "^6.0"
   },
   "autoload": {
-
+    "psr-4": {
+      "Lmc\\User\\Mezzio\\": "src/"
+    }
   },
   "autoload-dev": {
-
+    "LmcTest\\User\\Mezzio": "test/"
   },
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "platform": {
+      "php": "8.2.99"
+    }
+  },
+  "extra": {
+    "laminas": {
+      "config-provider": "Lmc\\User\\Mezzio\\ConfigProvider"
     }
   },
   "scripts": {
@@ -39,5 +60,15 @@
     "cs-fix": "phpcbf",
     "test-coverage-html": "phpunit --coverage-html ./build/html",
     "static-analysis": "psalm --shepherd --stats"
-  }
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "c:/lm-commons/lmc-authentication"
+    },
+    {
+      "type": "git",
+      "url": "c:/lm-commons/lmc-user-repository"
+    }
+  ]
 }

@@ -1,0 +1,12 @@
+<?php
+/** @var \Lmc\User\Mezzio\Entity\User $user */
+$user = $this->user;
+?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Hi <?=$user->getDisplayName()?></p>
+            <a href="<?=$this->url('lmcuser.logout')?>" class="btn">Logout</a>
+        </div>
+    </div>
+</div>

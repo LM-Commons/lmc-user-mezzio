@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Lmc\User\Mezzio\Handler;
 
 use Laminas\Diactoros\Response\RedirectResponse;
-use Lmc\User\Mezzio\Authentication;
+use Lmc\User\Authentication\Authentication;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Helper\UrlHelper;
 use Psr\Http\Message\ResponseInterface;

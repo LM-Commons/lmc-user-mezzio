@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Lmc\User\Mezzio\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
-use Lmc\Authentication\UserInterface;
 use Lmc\User\Mezzio\Options\Options;
+use Mezzio\Authentication\UserInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

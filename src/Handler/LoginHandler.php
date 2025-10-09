@@ -90,9 +90,9 @@ class LoginHandler implements RequestHandlerInterface
         if ($result instanceof ResponseInterface) {
             return $result;
         }
-        $auth = $this->authenticationService->authenticate($adapter);
+        $authResult = $this->authenticationService->authenticate($adapter);
 
-        if (! $auth instanceof UserInterface) {
+        if (! $authResult->isValid()) {
             return new HtmlResponse($this->renderer->render(
                 $this->options->getTemplate('login'),
                 [

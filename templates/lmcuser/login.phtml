@@ -11,6 +11,15 @@ $form->setAttribute('autocomplete', 'off');
             <h1>Sign In</h1>
         </div>
     </div>
+    <?php if (count($this->messages) >0): ?>
+    <div class="row">
+        <div class="col">
+            <?php foreach ($this->messages as $message): ?>
+            <p><?= $message ?></p>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php endif; ?>
     <div class="row">
         <div class="col">
             <?php echo $this->form()->openTag($form);?>

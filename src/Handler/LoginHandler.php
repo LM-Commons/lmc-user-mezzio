@@ -99,7 +99,7 @@ class LoginHandler implements RequestHandlerInterface
                     'loginForm'          => $this->loginForm,
                     'redirect'           => $redirect,
                     'enableRegistration' => $this->options->getEnableRegistration(),
-                    'error'              => $result,
+                    'messages'           => $authResult->getMessages(),
                 ]
             ));
         }

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\Handler;
 
+use Laminas\Authentication\AuthenticationService;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Form\FormInterface;
+use Lmc\User\Authentication\Adapter\AdapterChain;
 use Lmc\User\Authentication\Authentication;
 use Lmc\User\Mezzio\Options\Options;
 //use Lmc\Authentication\UserInterface;
@@ -22,7 +24,7 @@ class LoginHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $renderer,
-        private Authentication $adapter,
+        private AuthenticationService $authenticationService,
         private Options $options,
         private FormInterface $loginForm,
         private UrlHelper $urlHelper,
@@ -78,9 +80,19 @@ class LoginHandler implements RequestHandlerInterface
                 ]
             ));
         }
-        $this->adapter->reset($request);
-        $result = $this->adapter->prepareForAuthentication($request);
-        if (! $result instanceof UserInterface) {
+        /** @var AdapterChain $adapter */
+        $adapter = $this->authenticationService->getAdapter();
+        $adapter->resetAdapters();
+        $this->authenticationService->clearIdentity();
+        $result = $adapter->prepareForAuthentication($request);
+
+        // Return early if an adapter returned a response
+        if ($result instanceof ResponseInterface) {
+            return $result;
+        }
+        $auth = $this->authenticationService->authenticate($adapter);
+
+        if (! $auth instanceof UserInterface) {
             return new HtmlResponse($this->renderer->render(
                 $this->options->getTemplate('login'),
                 [

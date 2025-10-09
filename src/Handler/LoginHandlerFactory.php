@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\Handler;
 
-//use Lmc\Authentication\AuthenticationInterface;
-use Lmc\User\Authentication\Authentication;
+use Laminas\Authentication\AuthenticationService;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Helper\UrlHelper;
 use Mezzio\Template\TemplateRendererInterface;
@@ -17,7 +16,7 @@ class LoginHandlerFactory
     {
         return new LoginHandler(
             $container->get(TemplateRendererInterface::class),
-            $container->get(Authentication::class),
+            $container->get(AuthenticationService::class),
             $container->get(Options::class),
             $container->get('lmcuser_login_form'),
             $container->get(UrlHelper::class)

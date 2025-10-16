@@ -12,9 +12,9 @@
     "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
     "laminas/laminas-eventmanager": "^3.10",
     "laminas/laminas-servicemanager": "^3.20 || ^4.2",
-    "lm-commons/lmc-authentication": "1.0.x-mezzio-authenticate-dev",
+    "lm-commons/lmc-authentication": "1.0.x-dev",
     "lm-commons/lmc-user-mezzio-authentication": "1.0.x-dev",
-    "lm-commons/lmc-user-repository": "1.0.x-authenticate-dev",
+    "lm-commons/lmc-user-repository": "1.0.x-dev",
     "psr/http-factory": "^1.0",
     "mezzio/mezzio-template": "^2.1",
     "mezzio/mezzio-helpers": "^5.18",
@@ -63,14 +63,6 @@
     "static-analysis": "psalm --shepherd --stats"
   },
   "repositories": [
-    {
-      "type": "git",
-      "url": "c:/lm-commons/lmc-authentication"
-    },
-    {
-      "type": "git",
-      "url": "c:/lm-commons/lmc-user-repository"
-    },
     {
       "type": "git",
       "url": "c:/lm-commons/lmc-user-mezzio-authentication"

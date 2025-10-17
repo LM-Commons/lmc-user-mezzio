@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio;
 
-use Lmc\Authentication\AuthenticationInterface;
 use Lmc\User\Mezzio\Form\LoginForm;
 use Lmc\User\Mezzio\Form\LoginFormFactory;
+use Lmc\User\Mezzio\Handler\RedirectCallback;
+use Lmc\User\Mezzio\Handler\RedirectCallbackFactory;
 use Mezzio\Application;
 
 class ConfigProvider
@@ -26,14 +27,13 @@ class ConfigProvider
                 'lmcuser_login_form' => LoginForm::class,
             ],
             'factories'  => [
-                AuthenticationInterface::class => AuthenticationFactory::class,
-                Authentication::class          => AuthenticationFactory::class,
-                UserRepository::class          => UserRepositoryFactory::class,
-                Options\Options::class         => Options\OptionsFactory::class,
-                Handler\LoginHandler::class    => Handler\LoginHandlerFactory::class,
-                Handler\UserHandler::class     => Handler\UserHandlerFactory::class,
-                Handler\LogoutHandler::class   => Handler\LogoutHandlerFactory::class,
-                LoginForm::class               => LoginFormFactory::class,
+                UserRepository::class        => UserRepositoryFactory::class,
+                Options\Options::class       => Options\OptionsFactory::class,
+                Handler\LoginHandler::class  => Handler\LoginHandlerFactory::class,
+                Handler\UserHandler::class   => Handler\UserHandlerFactory::class,
+                Handler\LogoutHandler::class => Handler\LogoutHandlerFactory::class,
+                LoginForm::class             => LoginFormFactory::class,
+                RedirectCallback::class      => RedirectCallbackFactory::class,
             ],
             'delegators' => [
                 Application::class => [

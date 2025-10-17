@@ -7,7 +7,7 @@ namespace Lmc\User\Mezzio\Handler;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Uri\Uri;
 use Lmc\User\Mezzio\Options\Options;
-use Mezzio\Exception\RuntimeException;
+use Mezzio\Router\Exception\RuntimeException;
 use Mezzio\Router\RouteResult;
 use Mezzio\Router\RouterInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -45,16 +45,22 @@ class RedirectCallback
         switch ($currentRoute) {
             case 'lmcuser.login':
             case 'lmcuser.register':
-                if ($redirect && $routeMatched) {
-                    return $redirect;
+                if (! $redirect) {
+                    return $this->router->generateUri($this->options->getLoginRedirectRoute());
+                } elseif ($redirect instanceof Uri) {
+                    return $redirect->toString();
                 } else {
-                    $route = $redirect ?: $this->options->getLoginRedirectRoute();
-                    return $this->router->generateUri($route);
+                    return $this->router->generateUri($redirect);
                 }
                 break;
             case 'lmcuser.logout':
-                $route = $redirect ?: $this->options->getLogoutRedirectRoute();
-                return $this->router->generateUri($route);
+                if (! $redirect) {
+                    return $this->router->generateUri($this->options->getLogoutRedirectRoute());
+                } elseif ($redirect instanceof Uri) {
+                    return $redirect->toString();
+                } else {
+                    return $this->router->generateUri($redirect);
+                }
                 break;
             default:
                 return $this->router->generateUri('lmcuser');
@@ -81,7 +87,7 @@ class RedirectCallback
         return true;
     }
 
-    private function getRedirectRouteFromRequest(ServerRequestInterface $request): string|bool
+    private function getRedirectRouteFromRequest(ServerRequestInterface $request): string|bool|Uri
     {
         $redirect = $request->getQueryParams()['redirect'] ?? null;
         if (null === $redirect) {

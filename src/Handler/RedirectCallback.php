@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Lmc\User\Mezzio\Handler;
 
 use Laminas\Diactoros\Response\RedirectResponse;
-use Laminas\Diactoros\ServerRequest;
+use Laminas\Uri\Uri;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Exception\RuntimeException;
-use Mezzio\Router\Route;
 use Mezzio\Router\RouteResult;
 use Mezzio\Router\RouterInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -64,8 +63,12 @@ class RedirectCallback
 
     private function routeMatched(string $route): bool
     {
-        $request = new ServerRequest([], [], $route);
-        return $this->router->match($request)->getMatchedRoute() instanceof Route;
+        try {
+            $this->router->generateUri($route);
+        } catch (RuntimeException $e) {
+            return false;
+        }
+        return true;
     }
 
     private function routeExists(string $route): bool
@@ -81,13 +84,31 @@ class RedirectCallback
     private function getRedirectRouteFromRequest(ServerRequestInterface $request): string|bool
     {
         $redirect = $request->getQueryParams()['redirect'] ?? null;
-        if ($redirect && ($this->routeMatched($redirect) || $this->routeExists($redirect))) {
-            return $redirect;
+        if (null === $redirect) {
+            $redirect = $request->getParsedBody()['redirect'] ?? null;
         }
 
-        $redirect = $request->getParsedBody()['redirect'] ?? null;
-        if ($redirect && ($this->routeMatched($redirect) || $this->routeExists($redirect))) {
-            return $redirect;
+        if ($redirect) {
+            if ($this->routeExists($redirect)) {
+                return $redirect;
+            } else {
+                // it may be a uri
+                $uri = $this->isUri($redirect);
+                if ($uri) {
+                    return $uri;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    private function isUri(string $route): bool|Uri
+    {
+        $uri = new Uri($route);
+        if ($uri->isValid()) {
+            return $uri;
         }
         return false;
     }

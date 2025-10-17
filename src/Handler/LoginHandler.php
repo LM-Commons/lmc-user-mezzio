@@ -8,6 +8,7 @@ use Laminas\Authentication\AuthenticationService;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Laminas\Form\Exception\ExceptionInterface;
 use Laminas\Form\FormInterface;
 use Lmc\User\Authentication\Adapter\AdapterChain;
 use Lmc\User\Mezzio\Options\Options;
@@ -64,6 +65,10 @@ class LoginHandler implements RequestHandlerInterface
         ));
     }
 
+    /**
+     * @throws ExceptionInterface
+     * @throws \Laminas\Authentication\Exception\ExceptionInterface
+     */
     private function handlePost(ServerRequestInterface $request): ResponseInterface
     {
         if ($this->options->getLoginRedirectRoute()) {
@@ -85,7 +90,7 @@ class LoginHandler implements RequestHandlerInterface
         }
         /** @var AdapterChain $adapter */
         $adapter = $this->authenticationService->getAdapter();
-        $adapter->resetAdapters();
+        $adapter->resetAdapters($request);
         $this->authenticationService->clearIdentity();
         $result = $adapter->prepareForAuthentication($request);
 

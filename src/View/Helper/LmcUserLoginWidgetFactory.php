@@ -7,7 +7,7 @@ namespace Lmc\User\Mezzio\View\Helper;
 use Lmc\User\Mezzio\Options\Options;
 use Psr\Container\ContainerInterface;
 
-class LmcLoginWidgetFactory
+class LmcUserLoginWidgetFactory
 {
     public function __invoke(ContainerInterface $container): LmcUserLoginWidget
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\View\Helper;
 
-use Laminas\Authentication\AuthenticationServiceInterface;
+use Laminas\Authentication\AuthenticationService;
 use Psr\Container\ContainerInterface;
 
 class LmcUserIdentityFactory
@@ -12,7 +12,7 @@ class LmcUserIdentityFactory
     public function __invoke(ContainerInterface $container): LmcUserIdentity
     {
         return new LmcUserIdentity(
-            $container->get(AuthenticationServiceInterface::class)
+            $container->get(AuthenticationService::class)
         );
     }
 }

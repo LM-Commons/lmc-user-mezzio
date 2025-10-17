@@ -108,6 +108,6 @@ class LoginHandler implements RequestHandlerInterface
         }
 
         $redirectCallback = $this->redirectCallback;
-        return $redirectCallback();
+        return $redirectCallback($request);
     }
 }

@@ -10,10 +10,8 @@ use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Form\FormInterface;
 use Lmc\User\Authentication\Adapter\AdapterChain;
-use Lmc\User\Authentication\Authentication;
 use Lmc\User\Mezzio\Options\Options;
 //use Lmc\Authentication\UserInterface;
-use Lmc\User\Repository\UserInterface;
 use Mezzio\Helper\UrlHelper;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -22,13 +20,18 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class LoginHandler implements RequestHandlerInterface
 {
+    /** @var callable $redirectCallback */
+    protected $redirectCallback;
+
     public function __construct(
-        private TemplateRendererInterface $renderer,
-        private AuthenticationService $authenticationService,
-        private Options $options,
-        private FormInterface $loginForm,
-        private UrlHelper $urlHelper,
+        private readonly TemplateRendererInterface $renderer,
+        private readonly AuthenticationService $authenticationService,
+        private readonly Options $options,
+        private readonly FormInterface $loginForm,
+        private readonly UrlHelper $urlHelper,
+        callable $redirectCallback,
     ) {
+        $this->redirectCallback = $redirectCallback;
     }
 
     /**
@@ -104,8 +107,7 @@ class LoginHandler implements RequestHandlerInterface
             ));
         }
 
-        return new RedirectResponse(
-            $this->urlHelper->generate($this->options->getLoginRedirectRoute())
-        );
+        $redirectCallback = $this->redirectCallback;
+        return $redirectCallback();
     }
 }

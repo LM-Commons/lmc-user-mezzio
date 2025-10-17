@@ -13,13 +13,18 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class LogoutHandler implements RequestHandlerInterface
+final class LogoutHandler implements RequestHandlerInterface
 {
+    /** @var callable $redirectCallback */
+    protected $redirectCallback;
+
     public function __construct(
         private AuthenticationService $authenticationService,
         private Options $options,
         private UrlHelper $urlHelper,
+        callable $redirectCallback
     ) {
+        $this->redirectCallback = $redirectCallback;
     }
 
     /**
@@ -32,10 +37,15 @@ class LogoutHandler implements RequestHandlerInterface
         $adapter->resetAdapters();
         $adapter->logoutAdapters();
         $this->authenticationService->clearIdentity();
+
+        $redirectCallback = $this->redirectCallback;
+        return $redirectCallback();
+/*
         return new RedirectResponse(
             $this->urlHelper->generate(
                 $this->options->getLogoutRedirectRoute(),
             )
         );
+*/
     }
 }

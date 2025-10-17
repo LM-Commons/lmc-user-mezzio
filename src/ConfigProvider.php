@@ -54,9 +54,9 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                View\Helper\LmcUserDisplayName::class => View\Helper\LmcUserDisplayNameFactory::class,
-                View\Helper\LmcUserIdentity::class    => View\Helper\LmcUserIdentityFactory::class,
-                View\Helper\LmcUserLoginWidget::class => View\Helper\LmcLoginWidgetFactory::class,
+                'lmcUserDisplayName' => View\Helper\LmcUserDisplayNameFactory::class,
+                'lmcUserIdentity'    => View\Helper\LmcUserIdentityFactory::class,
+                'lmcUserLoginWidget' => View\Helper\LmcUserLoginWidgetFactory::class,
             ],
         ];
     }

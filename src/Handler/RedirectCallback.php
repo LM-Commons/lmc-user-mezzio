@@ -32,7 +32,7 @@ class RedirectCallback
         return new RedirectResponse($redirect);
     }
 
-    private function getRedirect(string $currentRoute, bool|string $redirect = false): string
+    private function getRedirect(string $currentRoute, bool|string|Uri $redirect = false): string
     {
         $useRedirect  = $this->options->getUseRedirectParameterIfPresent();
         $routeMatched = $redirect && $this->routeMatched($currentRoute);

@@ -12,9 +12,9 @@ use Lmc\User\Mezzio\Options\Options;
 
 class RegisterForm extends Form
 {
-    public function __construct(Options $options, string $name = 'register-form')
+    public function __construct(Options $options)
     {
-        parent::__construct($name);
+        parent::__construct('register-form');
 
         if ($options->getEnableUsername()) {
             $this->add([

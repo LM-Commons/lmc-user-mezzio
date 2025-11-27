@@ -11,7 +11,7 @@ class LoginFormFactory
 {
     public function __invoke(ContainerInterface $container): LoginForm
     {
-        $form = new LoginForm(null, $container->get(Options::class));
+        $form = new LoginForm($container->get(Options::class));
         $form->setInputFilter(new LoginFilter($container->get(Options::class)));
         return $form;
     }

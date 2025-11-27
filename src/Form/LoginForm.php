@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace Lmc\User\Mezzio\Form;
 
 use Laminas\Form\Element\Button;
+use Laminas\Form\Element\Csrf;
 use Laminas\Form\Element\Password;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 use Lmc\User\Mezzio\Options\Options;
 
+use function ucfirst;
+
 class LoginForm extends Form
 {
-    /**
-     * @param string|null $name
-     */
-    //phpcs:disable
-    public function __construct($name = 'login-form', Options $options)
+    public function __construct(Options $options)
     {
-        parent::__construct($name);
+        parent::__construct('login-form');
         $this->add([
             'name'    => 'identity',
             'type'    => Text::class,
@@ -28,10 +27,10 @@ class LoginForm extends Form
         ]);
 
         $emailElement = $this->get('identity');
-        $label = $emailElement->getLabel('label');
+        $label        = $emailElement->getLabel('label');
         // @TODO: make translation-friendly
         foreach ($options->getAuthIdentityFields() as $mode) {
-            $label = (!empty($label) ? $label . ' or ' : '') . ucfirst($mode);
+            $label = (! empty($label) ? $label . ' or ' : '') . ucfirst($mode);
         }
         $emailElement->setLabel($label);
 
@@ -45,13 +44,13 @@ class LoginForm extends Form
         ]);
         if ($options->getUseLoginFormCsrf()) {
             $this->add([
-                'type' => '\Laminas\Form\Element\Csrf',
-                'name' => 'security',
+                'type'    => Csrf::class,
+                'name'    => 'security',
                 'options' => [
                     'csrf_options' => [
-                        'timeout' => $options->getLoginFormTimeout()
-                    ]
-                ]
+                        'timeout' => $options->getLoginFormTimeout(),
+                    ],
+                ],
             ]);
         }
         $this->add([

@@ -16,7 +16,8 @@ class LogoutHandlerFactory
         return new LogoutHandler(
             $container->get(AuthenticationService::class),
             $container->get(Options::class),
-            $container->get(UrlHelper::class)
+            $container->get(UrlHelper::class),
+            $container->get(RedirectCallback::class)
         );
     }
 }

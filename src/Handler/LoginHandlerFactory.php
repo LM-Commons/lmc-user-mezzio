@@ -19,7 +19,8 @@ class LoginHandlerFactory
             $container->get(AuthenticationService::class),
             $container->get(Options::class),
             $container->get('lmcuser_login_form'),
-            $container->get(UrlHelper::class)
+            $container->get(UrlHelper::class),
+            $container->get(RedirectCallback::class),
         );
     }
 }

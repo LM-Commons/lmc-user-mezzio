@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio;
 
-use Lmc\Authentication\AuthenticationInterface;
-use Lmc\User\Mezzio\Form\LoginForm;
-use Lmc\User\Mezzio\Form\LoginFormFactory;
 use Mezzio\Application;
 
 class ConfigProvider
@@ -16,6 +13,7 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             'templates'    => $this->getTemplates(),
+            'view_helpers' => $this->getViewHelperConfig(),
         ];
     }
 
@@ -23,17 +21,17 @@ class ConfigProvider
     {
         return [
             'aliases'    => [
-                'lmcuser_login_form' => LoginForm::class,
+                'lmcuser_login_form' => Form\LoginForm::class,
             ],
             'factories'  => [
-                AuthenticationInterface::class => AuthenticationFactory::class,
-                Authentication::class          => AuthenticationFactory::class,
-                UserRepository::class          => UserRepositoryFactory::class,
-                Options\Options::class         => Options\OptionsFactory::class,
-                Handler\LoginHandler::class    => Handler\LoginHandlerFactory::class,
-                Handler\UserHandler::class     => Handler\UserHandlerFactory::class,
-                Handler\LogoutHandler::class   => Handler\LogoutHandlerFactory::class,
-                LoginForm::class               => LoginFormFactory::class,
+                UserRepository::class              => UserRepositoryFactory::class,
+                Options\Options::class             => Options\OptionsFactory::class,
+                Handler\LoginHandler::class        => Handler\LoginHandlerFactory::class,
+                Handler\UserHandler::class         => Handler\UserHandlerFactory::class,
+                Handler\LogoutHandler::class       => Handler\LogoutHandlerFactory::class,
+                Form\LoginForm::class              => Form\LoginFormFactory::class,
+                Handler\RedirectCallback::class    => Handler\RedirectCallbackFactory::class,
+                Helper\AuthenticationHelper::class => Helper\AuthenticationHelperFactory::class,
             ],
             'delegators' => [
                 Application::class => [
@@ -48,6 +46,17 @@ class ConfigProvider
         return [
             'paths' => [
                 'lmcuser' => [__DIR__ . '/../templates/lmcuser'],
+            ],
+        ];
+    }
+
+    private function getViewHelperConfig(): array
+    {
+        return [
+            'factories' => [
+                'lmcUserDisplayName' => View\Helper\LmcUserDisplayNameFactory::class,
+                'lmcUserIdentity'    => View\Helper\LmcUserIdentityFactory::class,
+                'lmcUserLoginWidget' => View\Helper\LmcUserLoginWidgetFactory::class,
             ],
         ];
     }

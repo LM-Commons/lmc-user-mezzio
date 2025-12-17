@@ -7,7 +7,6 @@ namespace Lmc\User\Mezzio\Handler;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
-use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Form\Exception\ExceptionInterface;
 use Laminas\Form\FormInterface;
 use Lmc\User\Authentication\Adapter\AdapterChain;

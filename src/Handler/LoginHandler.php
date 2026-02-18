@@ -48,6 +48,13 @@ class LoginHandler implements RequestHandlerInterface
 
     private function handleGet(ServerRequestInterface $request): ResponseInterface
     {
+        // logout first
+        $adapter = $this->authenticationService->getAdapter();
+        /** @var AdapterChain $adapter */
+        $adapter->resetAdapters($request);
+        $adapter->logoutAdapters($request);
+        $this->authenticationService->clearIdentity();
+
         if ($this->options->getLoginRedirectRoute()) {
             $queryParams = $request->getQueryParams();
             $redirect    = $queryParams['redirect'] ?? false;

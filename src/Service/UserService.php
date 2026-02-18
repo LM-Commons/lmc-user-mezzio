@@ -17,7 +17,7 @@ use function password_verify;
 
 use const PASSWORD_BCRYPT;
 
-class UserService implements EventManagerAwareInterface, UserServiceInterface
+final class UserService implements EventManagerAwareInterface, UserServiceInterface
 {
     use EventManagerAwareTrait;
 

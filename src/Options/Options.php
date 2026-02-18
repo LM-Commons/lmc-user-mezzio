@@ -47,8 +47,9 @@ class Options extends AbstractOptions
     protected string $basePath                    = '';
 
     protected array $templateMap = [
-        'login' => 'lmcuser::login',
-        'user'  => 'lmcuser::user',
+        'login'    => 'lmcuser::login',
+        'user'     => 'lmcuser::user',
+        'register' => 'lmcuser::register',
     ];
 
     public function setLoginRedirectRoute(string $loginRedirectRoute): self

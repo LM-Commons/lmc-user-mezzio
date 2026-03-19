@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38789f9dd31f0363742881d2d25846fb",
+    "content-hash": "c59178fe2b26111806fda8c5494dd20b",
     "packages": [
         {
             "name": "dflydev/fig-cookies",
@@ -1607,8 +1607,8 @@
             "version": "1.0.x-dev",
             "source": {
                 "type": "git",
-                "url": "c:/lm-commons/lmc-user-mezzio-authentication",
-                "reference": "8800cd878f29afe98191b0fff33d52c2009bf901"
+                "url": "https://github.com/LM-Commons/lmc-user-mezzio-authentication.git",
+                "reference": "07abde60c150a8339367e7d6852385be737ee190"
             },
             "require": {
                 "laminas/laminas-authentication": "^2.13",
@@ -1678,7 +1678,7 @@
                 }
             ],
             "description": "lmc-user adapter for mezzio-authentication",
-            "time": "2026-01-23T21:01:27+00:00"
+            "time": "2026-01-23T21:07:10+00:00"
         },
         {
             "name": "lm-commons/lmc-user-repository",

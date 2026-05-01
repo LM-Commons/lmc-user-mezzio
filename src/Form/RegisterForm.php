@@ -53,7 +53,6 @@ class RegisterForm extends Form
             ]);
         }
 
-
         $this->add([
             'name'       => 'password',
             'type'       => Password::class,

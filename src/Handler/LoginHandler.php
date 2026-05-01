@@ -7,7 +7,6 @@ namespace Lmc\User\Mezzio\Handler;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
-use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Form\Exception\ExceptionInterface;
 use Laminas\Form\FormInterface;
 use Lmc\User\Authentication\Adapter\AdapterChain;
@@ -49,6 +48,13 @@ class LoginHandler implements RequestHandlerInterface
 
     private function handleGet(ServerRequestInterface $request): ResponseInterface
     {
+        // logout first
+        $adapter = $this->authenticationService->getAdapter();
+        /** @var AdapterChain $adapter */
+        $adapter->resetAdapters($request);
+        $adapter->logoutAdapters($request);
+        $this->authenticationService->clearIdentity();
+
         if ($this->options->getLoginRedirectRoute()) {
             $queryParams = $request->getQueryParams();
             $redirect    = $queryParams['redirect'] ?? false;

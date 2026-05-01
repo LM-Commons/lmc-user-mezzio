@@ -6,7 +6,6 @@ namespace Lmc\User\Mezzio\Handler;
 
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Authentication\Exception\ExceptionInterface;
-use Laminas\Diactoros\Response\RedirectResponse;
 use Lmc\User\Authentication\Adapter\AdapterChain;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Helper\UrlHelper;

@@ -31,12 +31,22 @@ class RegisterFormFactory
                 'No register form hydrator available. Did you forget to add a use repository library?'
             );
         }
+
+        /** @var AdapterInterface $mapper */
+        $mapper = $container->has(AdapterInterface::class)
+            ? $container->get(AdapterInterface::class)
+            : null;
+
+        if (null === $mapper) {
+            throw new InvalidConfigurationException(
+                'No User Repository adapter available. Did you forget to add a use repository library?'
+            );
+        }
+
         /** @var Options $options */
         $options = $container->get(Options::class);
         $form    = new RegisterForm($options);
 
-        /** @var AdapterInterface $mapper */
-        $mapper = $container->get('lmcuser_user_mapper');
 
         $form->setHydrator($container->get('lmcuser_register_form_hydrator'));
         $form->setInputFilter(

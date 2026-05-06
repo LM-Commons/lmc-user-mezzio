@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\Form;
 
+use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Captcha;
 use Laminas\Form\Element\Password;
-use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Exception\ExceptionInterface;
 use Laminas\Form\Form;
@@ -84,7 +84,7 @@ class RegisterForm extends Form
         );
         $this->add([
             'name'       => 'submit',
-            'type'       => Submit::class,
+            'type'       => Button::class,
             'options'    => [
                 'label' => 'Register',
             ],

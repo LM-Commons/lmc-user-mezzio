@@ -1,0 +1,38 @@
+<?php
+/** @var \Laminas\Form\FormInterface $form */
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('method', 'post');
+$form->setAttribute('enctype', 'multipart/form-data');
+$form->setAttribute('autocomplete', 'off');
+?>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Register</h1>
+        </div>
+    </div>
+    <?php if ($this->messages && count($this->messages) >0): ?>
+        <div class="row">
+            <div class="col">
+                <?php foreach ($this->messages as $message): ?>
+                    <p><?= $message ?></p>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+    <div class="row">
+        <div class="col">
+            <?php echo $this->form()->openTag($form);?>
+            <dl>
+                <?php foreach ($form as $element): ?>
+                    <?php if ($element->getLabel() != null && !$element instanceof Laminas\Form\Element\Button) : ?>
+                        <dt><?php echo $this->formLabel($element) ?></dt>
+                    <?php endif ?>
+                    <dd><?php echo $this->formElement($element) . $this->formElementErrors($element) ?></dd>
+                <?php endforeach;?>
+            </dl>
+            <?php echo $this->form()->closeTag();?>
+        </div>
+    </div>
+</div>

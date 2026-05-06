@@ -8,6 +8,7 @@ use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 use Lmc\Authentication\AuthenticationMiddleware;
 use Lmc\User\Mezzio\Handler\LoginHandler;
 use Lmc\User\Mezzio\Handler\LogoutHandler;
+use Lmc\User\Mezzio\Handler\RegisterHandler;
 use Lmc\User\Mezzio\Handler\UserHandler;
 use Lmc\User\Mezzio\Options\Options;
 use Mezzio\Application;
@@ -47,6 +48,12 @@ class RoutesDelegator implements DelegatorFactoryInterface
             sprintf('%s%s', $lmcuserOptions->getBasePath(), '/logout'),
             [LogoutHandler::class],
             'lmcuser.logout'
+        );
+        $application->route(
+            sprintf('%s%s', $lmcuserOptions->getBasePath(), '/register'),
+            [RegisterHandler::class],
+            ['GET', 'POST'],
+            'lmcuser.register'
         );
 
         return $application;

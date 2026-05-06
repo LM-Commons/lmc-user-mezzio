@@ -49,8 +49,8 @@ class LoginHandler implements RequestHandlerInterface
     private function handleGet(ServerRequestInterface $request): ResponseInterface
     {
         // logout first
-        $adapter = $this->authenticationService->getAdapter();
         /** @var AdapterChain $adapter */
+        $adapter = $this->authenticationService->getAdapter();
         $adapter->resetAdapters($request);
         $adapter->logoutAdapters($request);
         $this->authenticationService->clearIdentity();

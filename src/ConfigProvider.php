@@ -21,7 +21,9 @@ class ConfigProvider
     {
         return [
             'aliases'    => [
-                'lmcuser_login_form' => Form\LoginForm::class,
+                'lmcuser_login_form'             => Form\LoginForm::class,
+                'lmcuser_register_form'          => Form\RegisterForm::class,
+                'lmcuser_register_form_hydrator' => 'lmcuser_user_hydrator', //this is defined by the user repository
             ],
             'factories'  => [
                 UserRepository::class              => UserRepositoryFactory::class,
@@ -29,7 +31,9 @@ class ConfigProvider
                 Handler\LoginHandler::class        => Handler\LoginHandlerFactory::class,
                 Handler\UserHandler::class         => Handler\UserHandlerFactory::class,
                 Handler\LogoutHandler::class       => Handler\LogoutHandlerFactory::class,
+                Handler\RegisterHandler::class     => Handler\RegisterHandlerFactory::class,
                 Form\LoginForm::class              => Form\LoginFormFactory::class,
+                Form\RegisterForm::class           => Form\RegisterFormFactory::class,
                 Handler\RedirectCallback::class    => Handler\RedirectCallbackFactory::class,
                 Helper\AuthenticationHelper::class => Helper\AuthenticationHelperFactory::class,
             ],

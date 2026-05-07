@@ -7,7 +7,7 @@ namespace Lmc\User\Mezzio\Service;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerAwareTrait;
 use Laminas\Form\Form;
-use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\HydratorInterface;
 use Lmc\User\Mezzio\Options\Options;
 use Lmc\User\Repository\AdapterInterface;
 use Lmc\User\Repository\UserInterface;
@@ -28,7 +28,7 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         private Form $registerForm,
         private readonly Form $changePasswordForm,
         private Options $options,
-        private ClassMethodsHydrator $formHydrator,
+        private HydratorInterface $formHydrator,
     ) {
     }
 

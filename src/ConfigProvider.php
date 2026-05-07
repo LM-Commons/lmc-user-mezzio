@@ -23,6 +23,7 @@ class ConfigProvider
             'aliases'    => [
                 'lmcuser_login_form'             => Form\LoginForm::class,
                 'lmcuser_register_form'          => Form\RegisterForm::class,
+                'lmcuser_changepassword_form'    => Form\ChangePasswordForm::class,
                 'lmcuser_register_form_hydrator' => 'lmcuser_user_hydrator', //this is defined by the user repository
             ],
             'factories'  => [

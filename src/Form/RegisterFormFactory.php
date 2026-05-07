@@ -32,7 +32,7 @@ class RegisterFormFactory
             );
         }
 
-        /** @var AdapterInterface $mapper */
+        /** @var AdapterInterface|null $mapper */
         $mapper = $container->has(AdapterInterface::class)
             ? $container->get(AdapterInterface::class)
             : null;

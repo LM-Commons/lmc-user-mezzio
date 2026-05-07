@@ -6,6 +6,7 @@ namespace Lmc\User\Mezzio\Handler;
 
 use Laminas\Authentication\AuthenticationService;
 use Lmc\User\Mezzio\Options\Options;
+use Lmc\User\Mezzio\Service\UserServiceInterface;
 use Mezzio\Helper\UrlHelper;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
@@ -19,7 +20,9 @@ class RegisterHandlerFactory
             $container->get(AuthenticationService::class),
             $container->get(Options::class),
             $container->get('lmcuser_register_form'),
+            $container->get(UserServiceInterface::class),
             $container->get(UrlHelper::class),
+            $container->get(LoginHandler::class)
         );
     }
 }

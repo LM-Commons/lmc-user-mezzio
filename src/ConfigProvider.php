@@ -34,6 +34,7 @@ class ConfigProvider
                 Handler\RegisterHandler::class     => Handler\RegisterHandlerFactory::class,
                 Form\LoginForm::class              => Form\LoginFormFactory::class,
                 Form\RegisterForm::class           => Form\RegisterFormFactory::class,
+                Form\ChangePasswordForm::class     => Form\ChangePasswordFormFactory::class,
                 Handler\RedirectCallback::class    => Handler\RedirectCallbackFactory::class,
                 Helper\AuthenticationHelper::class => Helper\AuthenticationHelperFactory::class,
             ],

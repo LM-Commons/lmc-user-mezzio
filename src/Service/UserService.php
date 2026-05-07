@@ -12,6 +12,7 @@ use Lmc\User\Mezzio\Options\Options;
 use Lmc\User\Repository\AdapterInterface;
 use Lmc\User\Repository\UserInterface;
 
+use Override;
 use function password_hash;
 use function password_verify;
 
@@ -31,6 +32,7 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
     ) {
     }
 
+    #[Override]
     public function register(array $data): ?UserInterface
     {
         $class = $this->options->getUserEntityClass();

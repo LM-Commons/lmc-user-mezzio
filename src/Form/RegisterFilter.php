@@ -24,16 +24,13 @@ class RegisterFilter extends InputFilter
                 'name'       => 'username',
                 'required'   => true,
                 'filters'    => [
-                    ['name' => StringTrim::class],
+                    new StringTrim(),
                 ],
                 'validators' => [
-                    [
-                        'name'    => StringLength::class,
-                        'options' => [
-                            'min' => 3,
-                            'max' => 255,
-                        ],
-                    ],
+                    new StringLength([
+                        'min' => 3,
+                        'max' => 255,
+                    ]),
                     $this->usernameValidator,
                 ],
             ]);
@@ -43,12 +40,10 @@ class RegisterFilter extends InputFilter
             'name'       => 'email',
             'required'   => true,
             'filters'    => [
-                ['name' => StringTrim::class],
+                new StringTrim(),
             ],
             'validators' => [
-                [
-                    'name' => EmailAddress::class,
-                ],
+                new EmailAddress(),
                 $this->emailValidator,
             ],
         ]);
@@ -58,16 +53,13 @@ class RegisterFilter extends InputFilter
                 'name'       => 'display_name',
                 'required'   => true,
                 'filters'    => [
-                    ['name' => StringTrim::class],
+                    new StringTrim(),
                 ],
                 'validators' => [
-                    [
-                        'name'    => StringLength::class,
-                        'options' => [
-                            'min' => 3,
-                            'max' => 255,
-                        ],
-                    ],
+                    new StringLength([
+                        'min' => 3,
+                        'max' => 255,
+                    ]),
                 ],
             ]);
         }
@@ -76,16 +68,13 @@ class RegisterFilter extends InputFilter
             'name'       => 'password',
             'required'   => true,
             'filters'    => [
-                ['name' => StringTrim::class],
+                new StringTrim(),
             ],
             'validators' => [
-                [
-                    'name'    => StringLength::class,
-                    'options' => [
-                        'min' => $this->options->getMinPasswordLength(),
-                        'max' => 255,
-                    ],
-                ],
+                new StringLength([
+                    'min' => $this->options->getMinPasswordLength(),
+                    'max' => 255,
+                ]),
             ],
         ]);
 
@@ -93,22 +82,16 @@ class RegisterFilter extends InputFilter
             'name'       => 'passwordVerify',
             'required'   => true,
             'filters'    => [
-                ['name' => StringTrim::class],
+                new StringTrim(),
             ],
             'validators' => [
-                [
-                    'name'    => StringLength::class,
-                    'options' => [
-                        'min' => $this->options->getMinPasswordLength(),
-                        'max' => 255,
-                    ],
-                ],
-                [
-                    'name'    => Identical::class,
-                    'options' => [
-                        'token' => 'password',
-                    ],
-                ],
+                new StringLength([
+                    'min' => $this->options->getMinPasswordLength(),
+                    'max' => 255,
+                ]),
+                new Identical([
+                    'token' => 'password',
+                ]),
             ],
         ]);
     }

@@ -24,10 +24,8 @@ class Options extends AbstractOptions
     protected bool $loginAfterRegistration        = true;
     protected bool $enableUserState               = false;
     protected int $defaultUserState               = 1;
-    protected array $allowedLoginStates           = [null, 1];
-    protected array $authAdapters                 = [100 => 'LmcUser\Authentication\Adapter\Db'];
     protected array $authIdentityFields           = ['email'];
-    protected string $userEntityClass             = 'LmcUser\Entity\User';
+    protected ?string $userEntityClass            = null;
     protected string $userLoginWidgetViewTemplate = 'lmc-user/user/login.phtml';
     protected bool $enableRegistration            = true;
     protected bool $enableUsername                = false;
@@ -192,17 +190,6 @@ class Options extends AbstractOptions
     {
         $this->allowedLoginStates = $states;
         return $this;
-    }
-
-    public function setAuthAdapters(array $authAdapters): self
-    {
-        $this->authAdapters = $authAdapters;
-        return $this;
-    }
-
-    public function getAuthAdapters(): array
-    {
-        return $this->authAdapters;
     }
 
     public function setAuthIdentityFields(array $authIdentityFields): self

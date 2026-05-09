@@ -37,7 +37,6 @@ class ConfigProvider
                 Handler\RedirectCallback::class     => Handler\RedirectCallbackFactory::class,
                 Helper\AuthenticationHelper::class  => Helper\AuthenticationHelperFactory::class,
                 Service\UserServiceInterface::class => Service\UserServiceFactory::class,
-                UserRepository::class               => UserRepositoryFactory::class,
                 Options\Options::class              => Options\OptionsFactory::class,
             ],
             'delegators' => [

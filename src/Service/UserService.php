@@ -11,8 +11,8 @@ use Laminas\Hydrator\HydratorInterface;
 use Lmc\User\Mezzio\Options\Options;
 use Lmc\User\Repository\AdapterInterface;
 use Lmc\User\Repository\UserInterface;
-
 use Override;
+
 use function password_hash;
 use function password_verify;
 
@@ -29,6 +29,7 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         private readonly Form $changePasswordForm,
         private Options $options,
         private HydratorInterface $formHydrator,
+        private readonly UserInterface $userEntity,
     ) {
     }
 
@@ -37,6 +38,7 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
     {
         $class = $this->options->getUserEntityClass();
         $user  = new $class();
+        $user = $this->userFactory();
         $this->registerForm->setHydrator($this->formHydrator);
         $this->registerForm->bind($user);
         $this->registerForm->setData($data);

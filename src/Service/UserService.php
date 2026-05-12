@@ -53,6 +53,7 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
                 ['cost' => $this->options->getPasswordCost()]
             )
         );
+        $user->setRoles($this->options->getDefaultRoles());
 
         if ($this->options->getEnableUsername()) {
             $user->setUsername($data['username']);

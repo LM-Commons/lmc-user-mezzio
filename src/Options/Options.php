@@ -53,6 +53,9 @@ class Options extends AbstractOptions
 
     protected int $minPasswordLength = 6;
 
+    /** @var string[]  */
+    protected array $defaultRoles = ['user'];
+
     public function setLoginRedirectRoute(string $loginRedirectRoute): self
     {
         $this->loginRedirectRoute = $loginRedirectRoute;
@@ -337,6 +340,23 @@ class Options extends AbstractOptions
     public function setMinPasswordLength(int $minPasswordLength): self
     {
         $this->minPasswordLength = $minPasswordLength;
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDefaultRoles(): array
+    {
+        return $this->defaultRoles;
+    }
+
+    /**
+     * @param string[] $defaultRoles
+     */
+    public function setDefaultRoles(array $defaultRoles): self
+    {
+        $this->defaultRoles = $defaultRoles;
         return $this;
     }
 }

@@ -29,7 +29,7 @@ class Options extends AbstractOptions
     protected string $userLoginWidgetViewTemplate = 'lmc-user/user/login.phtml';
     protected bool $enableRegistration            = true;
     protected bool $enableUsername                = false;
-    protected bool $enableDisplayName             = false;
+    protected bool $enableDisplayName             = true;
     protected bool $useRegistrationFormCaptcha    = false;
     protected bool $useLoginFormCaptcha           = false;
     protected bool $useLoginFormCsrf              = true;

@@ -1684,16 +1684,16 @@
         },
         {
             "name": "lm-commons/lmc-user-repository",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LM-Commons/lmc-user-repository.git",
-                "reference": "c8034a5c91a079f9c955d7321ffda378b06433dc"
+                "reference": "d3a507690aaab9bfb5be1f37e927dd45b86e1c07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LM-Commons/lmc-user-repository/zipball/c8034a5c91a079f9c955d7321ffda378b06433dc",
-                "reference": "c8034a5c91a079f9c955d7321ffda378b06433dc",
+                "url": "https://api.github.com/repos/LM-Commons/lmc-user-repository/zipball/d3a507690aaab9bfb5be1f37e927dd45b86e1c07",
+                "reference": "d3a507690aaab9bfb5be1f37e927dd45b86e1c07",
                 "shasum": ""
             },
             "require": {
@@ -1724,9 +1724,9 @@
             "description": "Lmc User Repository Interface",
             "support": {
                 "issues": "https://github.com/LM-Commons/lmc-user-repository/issues",
-                "source": "https://github.com/LM-Commons/lmc-user-repository/tree/1.1.0"
+                "source": "https://github.com/LM-Commons/lmc-user-repository/tree/1.2.0"
             },
-            "time": "2026-04-29T16:11:58+00:00"
+            "time": "2026-05-09T20:35:55+00:00"
         },
         {
             "name": "mezzio/mezzio-authentication",
@@ -2824,16 +2824,16 @@
         },
         {
             "name": "amphp/parallel",
-            "version": "v2.3.3",
+            "version": "v2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/parallel.git",
-                "reference": "296b521137a54d3a02425b464e5aee4c93db2c60"
+                "reference": "3ad45d1cff1bfbfe832c79671e6a4a1017dd9921"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/parallel/zipball/296b521137a54d3a02425b464e5aee4c93db2c60",
-                "reference": "296b521137a54d3a02425b464e5aee4c93db2c60",
+                "url": "https://api.github.com/repos/amphp/parallel/zipball/3ad45d1cff1bfbfe832c79671e6a4a1017dd9921",
+                "reference": "3ad45d1cff1bfbfe832c79671e6a4a1017dd9921",
                 "shasum": ""
             },
             "require": {
@@ -2853,7 +2853,7 @@
                 "amphp/php-cs-fixer-config": "^2",
                 "amphp/phpunit-util": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^5.18"
+                "psalm/phar": "6.16.1"
             },
             "type": "library",
             "autoload": {
@@ -2896,7 +2896,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/parallel/issues",
-                "source": "https://github.com/amphp/parallel/tree/v2.3.3"
+                "source": "https://github.com/amphp/parallel/tree/v2.3.4"
             },
             "funding": [
                 {
@@ -2904,7 +2904,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-15T06:23:42+00:00"
+            "time": "2026-05-06T19:26:51+00:00"
         },
         {
             "name": "amphp/parser",
@@ -2970,16 +2970,16 @@
         },
         {
             "name": "amphp/pipeline",
-            "version": "v1.2.3",
+            "version": "v1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/pipeline.git",
-                "reference": "7b52598c2e9105ebcddf247fc523161581930367"
+                "reference": "a044733e080940d1483f56caff0c412ad6982776"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/pipeline/zipball/7b52598c2e9105ebcddf247fc523161581930367",
-                "reference": "7b52598c2e9105ebcddf247fc523161581930367",
+                "url": "https://api.github.com/repos/amphp/pipeline/zipball/a044733e080940d1483f56caff0c412ad6982776",
+                "reference": "a044733e080940d1483f56caff0c412ad6982776",
                 "shasum": ""
             },
             "require": {
@@ -2991,7 +2991,7 @@
                 "amphp/php-cs-fixer-config": "^2",
                 "amphp/phpunit-util": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^5.18"
+                "psalm/phar": "6.16.1"
             },
             "type": "library",
             "autoload": {
@@ -3025,7 +3025,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/pipeline/issues",
-                "source": "https://github.com/amphp/pipeline/tree/v1.2.3"
+                "source": "https://github.com/amphp/pipeline/tree/v1.2.4"
             },
             "funding": [
                 {
@@ -3033,7 +3033,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-16T16:33:53+00:00"
+            "time": "2026-05-06T05:37:57+00:00"
         },
         {
             "name": "amphp/process",

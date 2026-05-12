@@ -36,9 +36,7 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
     #[Override]
     public function register(array $data): ?UserInterface
     {
-        $class = $this->options->getUserEntityClass();
-        $user  = new $class();
-        $user = $this->userFactory();
+        $user = clone $this->userEntity;
         $this->registerForm->setHydrator($this->formHydrator);
         $this->registerForm->bind($user);
         $this->registerForm->setData($data);

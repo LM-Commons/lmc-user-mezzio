@@ -79,11 +79,11 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         return $user;
     }
 
-    public function changePassword(UserInterface $user, string $oldPassword, string $newPassword): ?UserInterface
+    public function changePassword(UserInterface $user, string $oldPassword, string $newPassword): UserInterface|bool
     {
         // check old password is valid
         if (! password_verify($oldPassword, $user->getPassword())) {
-            return null;
+            return false;
         }
         $user->setPassword(
             password_hash(

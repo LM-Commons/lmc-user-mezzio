@@ -6,6 +6,7 @@ namespace Lmc\User\Mezzio;
 
 use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 use Lmc\Authentication\AuthenticationMiddleware;
+use Lmc\User\Mezzio\Handler\ChangePasswordHandler;
 use Lmc\User\Mezzio\Handler\LoginHandler;
 use Lmc\User\Mezzio\Handler\LogoutHandler;
 use Lmc\User\Mezzio\Handler\RegisterHandler;
@@ -49,11 +50,19 @@ class RoutesDelegator implements DelegatorFactoryInterface
             [LogoutHandler::class],
             'lmcuser.logout'
         );
+
         $application->route(
             sprintf('%s%s', $lmcuserOptions->getBasePath(), '/register'),
             [RegisterHandler::class],
             ['GET', 'POST'],
             'lmcuser.register'
+        );
+
+        $application->route(
+            sprintf('%s%s', $lmcuserOptions->getBasePath(), '/change-password'),
+            [ChangePasswordHandler::class],
+            ['GET', 'POST'],
+            'lmcuser.change_password'
         );
 
         return $application;

@@ -46,7 +46,7 @@ class UserServiceFactory
             $mapper,
             $container->get('lmcuser_login_form'),
             $container->get('lmcuser_register_form'),
-            $container->get('lmcuser_changepassword_form'),
+            $container->get('lmcuser_change_password_form'),
             $container->get(Options::class),
             $container->get('lmcuser_register_form_hydrator'),
             $user,

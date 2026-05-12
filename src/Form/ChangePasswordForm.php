@@ -52,7 +52,7 @@ class ChangePasswordForm extends Form
                 'label' => 'Change password',
             ],
             'attributes' => [
-                'value' => 'submit',
+                'type' => 'submit',
             ],
         ]);
     }

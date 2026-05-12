@@ -113,9 +113,9 @@ final class RegisterHandler implements RequestHandlerInterface
                 $post['identity'] = $user->getUsername();
             }
             $post['credential'] = $post['password'];
-            $request->withParsedBody($post)
-                ->withMethod('POST');
-            return $this->loginHander->handle($request);
+            unset($post['password']);
+            unset($post['passwordVerify']);
+            return $this->loginHander->handle($request->withParsedBody($post)->withMethod('POST'));
         }
 
         return new RedirectResponse(

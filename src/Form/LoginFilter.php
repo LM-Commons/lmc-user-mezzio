@@ -24,7 +24,7 @@ class LoginFilter extends InputFilter
 
         $identityField = $this->options->getAuthIdentityFields();
         if ($identityField === ['email']) {
-            $validators = [
+            $validators                   = [
                 new EmailAddress(),
             ];
             $identityParams['validators'] = $validators;

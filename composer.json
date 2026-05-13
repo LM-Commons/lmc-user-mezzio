@@ -1,7 +1,7 @@
 {
   "name": "lm-commons/lmc-user-mezzio",
   "description": "LmcUser for Mezzio",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "authors": [
     {
       "name": "Eric Richer",

@@ -20,7 +20,7 @@ $form->setAttribute('autocomplete', 'off');
     <?php endif; ?>
     <div class="row">
         <div class="col">
-            <?php echo $this->partial('lmcuser::_form.phtml') ?>;?>
+            <?php echo $this->partial('lmcuser::_form.phtml', ['form' => $form]) ?>
         </div>
     </div>
 </div>

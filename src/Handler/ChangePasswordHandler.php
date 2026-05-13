@@ -82,7 +82,9 @@ class ChangePasswordHandler implements RequestHandlerInterface
                         [
                             'form'     => $this->form,
                             'messages' => [
-                                'success' => 'Your password has been changed successfully.',
+                                [
+                                    'success' => 'Your password has been changed successfully.',
+                                ],
                             ],
                         ]
                     )
@@ -94,7 +96,9 @@ class ChangePasswordHandler implements RequestHandlerInterface
                         [
                             'form'     => $this->form,
                             'messages' => [
-                                'danger' => 'Invalid password. Try again.',
+                                [
+                                    'danger' => 'Invalid password. Try again.',
+                                ],
                             ],
                         ]
                     )

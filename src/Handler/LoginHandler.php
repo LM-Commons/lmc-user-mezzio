@@ -107,13 +107,19 @@ class LoginHandler implements RequestHandlerInterface
         $authResult = $this->authenticationService->authenticate($adapter);
 
         if (! $authResult->isValid()) {
+            $messages = [];
+            foreach ($authResult->getMessages() as $message) {
+                $messages[] = [
+                    'danger' => $message,
+                ];
+            }
             return new HtmlResponse($this->renderer->render(
                 $this->options->getTemplate('login'),
                 [
                     'loginForm'          => $this->loginForm,
                     'redirect'           => $redirect,
                     'enableRegistration' => $this->options->getEnableRegistration(),
-                    'messages'           => $authResult->getMessages(),
+                    'messages'           => $messages,
                 ]
             ));
         }

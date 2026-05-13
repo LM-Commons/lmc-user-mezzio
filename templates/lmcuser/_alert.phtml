@@ -1,9 +1,10 @@
 <?php if (null !== $this->messages && is_array($this->messages) && count($this->messages) >0) : ?>
-    <?php foreach ($this->messages as $key => $message) : ?>
-        <?php if (! is_string($key)) : ?>
+    <?php foreach ($this->messages as $message) : ?>
+        <?php if (is_string($message)) : ?>
         <div class="alert alert-info" role="alert"><?php echo $this->translate($message)?></div>
-        <?php else: ?>
-        <div class="alert alert-<?php echo $key?>" role="alert"><?php echo $this->translate($message); ?></div>
+        <?php elseif (is_array($message)) : ?>
+        <?php $key = array_key_first($message); ?>
+        <div class="alert alert-<?php echo $key?>" role="alert"><?php echo $this->translate($message[$key]); ?></div>
         <?php endif; ?>
     <?php endforeach; ?>
 <?php endif; ?>

@@ -53,6 +53,9 @@ class ChangePasswordFilter extends InputFilter
                 ]),
                 new Identical([
                     'token' => 'newCredential',
+                    'messages' => [
+                        Identical::NOT_SAME => 'Passwords do not match',
+                    ],
                 ]),
             ],
         ]);

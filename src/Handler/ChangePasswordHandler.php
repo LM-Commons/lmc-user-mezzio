@@ -79,8 +79,10 @@ class ChangePasswordHandler implements RequestHandlerInterface
                     $this->renderer->render(
                         $this->options->getTemplate('change-password'),
                         [
-                            'status' => true,
-                            'form'   => $this->form,
+                            'form'     => $this->form,
+                            'messages' => [
+                                'success' => 'Your password has been changed successfully.',
+                            ],
                         ]
                     )
                 );
@@ -89,8 +91,10 @@ class ChangePasswordHandler implements RequestHandlerInterface
                     $this->renderer->render(
                         $this->options->getTemplate('change-password'),
                         [
-                            'status' => false,
-                            'form'   => $this->form,
+                            'status'   => false,
+                            'messages' => [
+                                'danger' => 'Invalid password. Try again.',
+                            ],
                         ]
                     )
                 );

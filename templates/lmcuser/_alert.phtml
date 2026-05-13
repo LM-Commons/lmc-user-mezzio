@@ -3,7 +3,7 @@
         <?php if (! is_string($key)) : ?>
         <div class="alert alert-info" role="alert"><?php echo $this->translate($message)?></div>
         <?php else: ?>
-        <div class="alert alert-<?php echo $key?>" role="alert"><?php echo $this->translate($message[$key]); ?></div>
+        <div class="alert alert-<?php echo $key?>" role="alert"><?php echo $this->translate($message); ?></div>
         <?php endif; ?>
     <?php endforeach; ?>
 <?php endif; ?>

@@ -43,7 +43,8 @@ class ChangeEmailFormFactory
                     'mapper' => $mapper,
                     'key'    => 'email',
                 ]),
-            )
+                $options,
+            ),
         );
 
         return $form;

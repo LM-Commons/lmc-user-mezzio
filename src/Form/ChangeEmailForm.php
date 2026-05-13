@@ -17,11 +17,6 @@ class ChangeEmailForm extends Form
         parent::__construct('change-email-form');
 
         $this->add([
-            'name' => 'identity',
-            'type' => Hidden::class,
-        ]);
-
-        $this->add([
             'name'    => 'credential',
             'type'    => Password::class,
             'options' => [
@@ -30,7 +25,7 @@ class ChangeEmailForm extends Form
         ]);
 
         $this->add([
-            'name'    => 'newIdentity',
+            'name'    => 'newEmail',
             'type'    => Text::class,
             'options' => [
                 'label' => 'New email',

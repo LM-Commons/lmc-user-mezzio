@@ -71,7 +71,7 @@ class ChangeEmailHandler implements RequestHandlerInterface
         $this->form->setData($post);
         if ($this->form->isValid()) {
             $data = $this->form->getData();
-            $user = $this->userService->changeEmail($user, $data['credential'], $data['newEmail']);
+            $user = $this->userService->changeEmail($user, $data['credential'], $data['newEmail'], $data['credential']);
 
             if ($user instanceof UserInterface) {
                 return new HtmlResponse(

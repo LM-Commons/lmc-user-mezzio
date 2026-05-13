@@ -8,13 +8,11 @@ use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Hidden;
 use Laminas\Form\Element\Password;
 use Laminas\Form\Form;
-use Lmc\User\Mezzio\Options\Options;
 
 class ChangePasswordForm extends Form
 {
-    public function __construct(
-        private readonly Options $configOptions
-    ) {
+    public function __construct()
+    {
         parent::__construct('change-password-form');
 
         $this->add([

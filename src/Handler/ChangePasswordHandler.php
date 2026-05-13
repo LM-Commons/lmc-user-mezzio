@@ -16,7 +16,8 @@ use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use function PHPUnit\Framework\assertInstanceOf;
+
+use function assert;
 
 class ChangePasswordHandler implements RequestHandlerInterface
 {
@@ -68,11 +69,11 @@ class ChangePasswordHandler implements RequestHandlerInterface
     {
         $post = $request->getParsedBody();
         $user = $this->authenticationService->getIdentity();
-        assertInstanceOf(UserInterface::class, $user);
+        assert($user instanceof UserInterface);
         $this->form->setData($post);
         if ($this->form->isValid()) {
             $data = $this->form->getData();
-            $user = $this->userService->changePassword($user, $data['password'], $data['newPassword']);
+            $user = $this->userService->changePassword($user, $data['credential'], $data['newCredential']);
 
             if ($user instanceof UserInterface) {
                 return new HtmlResponse(
@@ -91,7 +92,7 @@ class ChangePasswordHandler implements RequestHandlerInterface
                     $this->renderer->render(
                         $this->options->getTemplate('change-password'),
                         [
-                            'status'   => false,
+                            'form'     => $this->form,
                             'messages' => [
                                 'danger' => 'Invalid password. Try again.',
                             ],

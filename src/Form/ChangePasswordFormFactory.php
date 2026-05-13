@@ -13,7 +13,7 @@ class ChangePasswordFormFactory
     {
         /** @var Options $options */
         $options = $container->get(Options::class);
-        $form    = new ChangePasswordForm($options);
+        $form    = new ChangePasswordForm();
 
         $form->setInputFilter(new ChangePasswordFilter($options));
         return $form;

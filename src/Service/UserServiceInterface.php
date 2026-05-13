@@ -10,7 +10,12 @@ interface UserServiceInterface
 {
     public function register(array $data): ?UserInterface;
 
-    public function changePassword(UserInterface $user, string $oldPassword, string $newPassword): ?UserInterface;
+    public function changePassword(UserInterface $user, string $oldPassword, string $newPassword): UserInterface|bool;
 
-    public function changeEmail(UserInterface $user, string $newEmail, string $password): ?UserInterface;
+    public function changeEmail(
+        UserInterface $user,
+        string $oldEmail,
+        string $newEmail,
+        string $credential,
+    ): UserInterface|bool;
 }

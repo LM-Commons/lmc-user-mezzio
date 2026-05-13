@@ -49,8 +49,8 @@ class LoginHandler implements RequestHandlerInterface
     private function handleGet(ServerRequestInterface $request): ResponseInterface
     {
         // logout first
-        $adapter = $this->authenticationService->getAdapter();
         /** @var AdapterChain $adapter */
+        $adapter = $this->authenticationService->getAdapter();
         $adapter->resetAdapters($request);
         $adapter->logoutAdapters($request);
         $this->authenticationService->clearIdentity();
@@ -107,13 +107,19 @@ class LoginHandler implements RequestHandlerInterface
         $authResult = $this->authenticationService->authenticate($adapter);
 
         if (! $authResult->isValid()) {
+            $messages = [];
+            foreach ($authResult->getMessages() as $message) {
+                $messages[] = [
+                    'danger' => $message,
+                ];
+            }
             return new HtmlResponse($this->renderer->render(
                 $this->options->getTemplate('login'),
                 [
                     'loginForm'          => $this->loginForm,
                     'redirect'           => $redirect,
                     'enableRegistration' => $this->options->getEnableRegistration(),
-                    'messages'           => $authResult->getMessages(),
+                    'messages'           => $messages,
                 ]
             ));
         }

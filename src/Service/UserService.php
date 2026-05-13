@@ -7,10 +7,11 @@ namespace Lmc\User\Mezzio\Service;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerAwareTrait;
 use Laminas\Form\Form;
-use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\HydratorInterface;
 use Lmc\User\Mezzio\Options\Options;
 use Lmc\User\Repository\AdapterInterface;
 use Lmc\User\Repository\UserInterface;
+use Override;
 
 use function password_hash;
 use function password_verify;
@@ -27,14 +28,15 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         private Form $registerForm,
         private readonly Form $changePasswordForm,
         private Options $options,
-        private ClassMethodsHydrator $formHydrator,
+        private HydratorInterface $formHydrator,
+        private readonly UserInterface $userEntity,
     ) {
     }
 
+    #[Override]
     public function register(array $data): ?UserInterface
     {
-        $class = $this->options->getUserEntityClass();
-        $user  = new $class();
+        $user = clone $this->userEntity;
         $this->registerForm->setHydrator($this->formHydrator);
         $this->registerForm->bind($user);
         $this->registerForm->setData($data);
@@ -51,6 +53,7 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
                 ['cost' => $this->options->getPasswordCost()]
             )
         );
+        $user->setRoles($this->options->getDefaultRoles());
 
         if ($this->options->getEnableUsername()) {
             $user->setUsername($data['username']);
@@ -76,11 +79,11 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         return $user;
     }
 
-    public function changePassword(UserInterface $user, string $oldPassword, string $newPassword): ?UserInterface
+    public function changePassword(UserInterface $user, string $oldPassword, string $newPassword): UserInterface|bool
     {
         // check old password is valid
         if (! password_verify($oldPassword, $user->getPassword())) {
-            return null;
+            return false;
         }
         $user->setPassword(
             password_hash(
@@ -96,8 +99,21 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         return $user;
     }
 
-    public function changeEmail(UserInterface $user, string $newEmail, string $password): ?UserInterface
-    {
-        // TODO: Implement changeEmail() method.
+    public function changeEmail(
+        UserInterface $user,
+        string $oldEmail,
+        string $newEmail,
+        string $credential
+    ): UserInterface|bool {
+        // check old password is valid
+        if (! password_verify($credential, $user->getPassword())) {
+            return false;
+        }
+        $user->setEmail($newEmail);
+        $data = ['oldEmail' => $oldEmail, 'newEmail' => $newEmail];
+        $this->getEventManager()->trigger(__FUNCTION__, $this, ['user' => $user, 'data' => $data]);
+        $user = $this->adapter->update($user);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['user' => $user, 'data' => $data]);
+        return $user;
     }
 }

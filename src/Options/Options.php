@@ -24,14 +24,12 @@ class Options extends AbstractOptions
     protected bool $loginAfterRegistration        = true;
     protected bool $enableUserState               = false;
     protected int $defaultUserState               = 1;
-    protected array $allowedLoginStates           = [null, 1];
-    protected array $authAdapters                 = [100 => 'LmcUser\Authentication\Adapter\Db'];
     protected array $authIdentityFields           = ['email'];
-    protected string $userEntityClass             = 'LmcUser\Entity\User';
+    protected ?string $userEntityClass            = null;
     protected string $userLoginWidgetViewTemplate = 'lmc-user/user/login.phtml';
     protected bool $enableRegistration            = true;
     protected bool $enableUsername                = false;
-    protected bool $enableDisplayName             = false;
+    protected bool $enableDisplayName             = true;
     protected bool $useRegistrationFormCaptcha    = false;
     protected bool $useLoginFormCaptcha           = false;
     protected bool $useLoginFormCsrf              = true;
@@ -47,10 +45,20 @@ class Options extends AbstractOptions
     protected string $basePath                    = '';
 
     protected array $templateMap = [
-        'login'    => 'lmcuser::login',
-        'user'     => 'lmcuser::user',
-        'register' => 'lmcuser::register',
+        'login'                       => 'lmcuser::login',
+        'user'                        => 'lmcuser::user',
+        'register'                    => 'lmcuser::register',
+        'register-not-allowed'        => 'lmcuser::register-not-allowed',
+        'change-password'             => 'lmcuser::change-password',
+        'change-password-not-allowed' => 'lmcuser::change-password-not-allowed',
+        'change-email'                => 'lmcuser::change-email',
+        'change-email-not-allowed'    => 'lmcuser::change-email-not-allowed',
     ];
+
+    protected int $minPasswordLength = 6;
+
+    /** @var string[]  */
+    protected array $defaultRoles = ['user'];
 
     public function setLoginRedirectRoute(string $loginRedirectRoute): self
     {
@@ -191,17 +199,6 @@ class Options extends AbstractOptions
         return $this;
     }
 
-    public function setAuthAdapters(array $authAdapters): self
-    {
-        $this->authAdapters = $authAdapters;
-        return $this;
-    }
-
-    public function getAuthAdapters(): array
-    {
-        return $this->authAdapters;
-    }
-
     public function setAuthIdentityFields(array $authIdentityFields): self
     {
         $this->authIdentityFields = $authIdentityFields;
@@ -337,5 +334,33 @@ class Options extends AbstractOptions
     public function getTemplate(string $templateName): ?string
     {
         return $this->templateMap[$templateName] ?? null;
+    }
+
+    public function getMinPasswordLength(): int
+    {
+        return $this->minPasswordLength;
+    }
+
+    public function setMinPasswordLength(int $minPasswordLength): self
+    {
+        $this->minPasswordLength = $minPasswordLength;
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDefaultRoles(): array
+    {
+        return $this->defaultRoles;
+    }
+
+    /**
+     * @param string[] $defaultRoles
+     */
+    public function setDefaultRoles(array $defaultRoles): self
+    {
+        $this->defaultRoles = $defaultRoles;
+        return $this;
     }
 }

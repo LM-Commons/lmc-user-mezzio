@@ -9,21 +9,13 @@
 
 $settings = [
     /**
-     * Laminas\Db\Adapter\Adapter DI Alias
-     *
-     * Please specify the DI alias for the configured Laminas\Db\Adapter\Adapter
-     * instance that LmcUser should use.
-     */
-    //'laminas_db_adapter' => \Laminas\Db\Adapter\Adapter::class,
-
-    /**
      * User Model Entity Class
      *
      * Name of Entity class to use. Useful for using your own entity class
      * instead of the default one provided. Default is LmcUser\Entity\User.
      * The entity class should implement LmcUser\Entity\UserInterface
      */
-    //'user_entity_class' => 'LmcUser\Entity\User',
+    //'user_entity_class' => 'Lmc\User\Entity\User',
 
     /**
      * Enable registration
@@ -43,16 +35,6 @@ $settings = [
      * Accepted values: boolean true or false
      */
     //'enable_username' => false,
-
-    /**
-     * Authentication Adapters
-     *
-     * Specify the adapters that will be used to try and authenticate the user
-     *
-     * Default value: array containing 'LmcUser\Authentication\Adapter\Db' with priority 100
-     * Accepted values: array containing services that implement 'LmcUser\Authentication\Adapter\ChainableAdapter'
-     */
-    'auth_adapters' => [100 => '\LmcUser\Authentication\Adapter\Db'],
 
     /**
      * Enable Display Name
@@ -261,11 +243,5 @@ $settings = [
  * You do not need to edit below this line
  */
 return [
-    'lmcuser' => $settings,
-    'service_manager' => [
-        'aliases' => [
-            'lmcuser_laminas_db_adapter' => (isset($settings['laminas_db_adapter'])) ?
-                $settings['laminas_db_adapter'] : \Laminas\Db\Adapter\Adapter::class,
-        ],
-    ],
+    'lmc_user' => $settings,
 ];

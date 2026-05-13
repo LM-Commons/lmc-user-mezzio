@@ -6,6 +6,7 @@ namespace Lmc\User\Mezzio\Form;
 
 use Laminas\Filter\StringTrim;
 use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\EmailAddress;
 use Laminas\Validator\StringLength;
 use Lmc\User\Mezzio\Options\Options;
 
@@ -23,22 +24,17 @@ class LoginFilter extends InputFilter
 
         $identityField = $this->options->getAuthIdentityFields();
         if ($identityField === ['email']) {
-            $validators                     = [
-                'name' => 'EmailAddress',
+            $validators                   = [
+                new EmailAddress(),
             ];
-            $identityParams['validators'][] = $validators;
+            $identityParams['validators'] = $validators;
         }
         $this->add($identityParams);
         $this->add([
             'name'       => 'credential',
             'required'   => true,
             'validators' => [
-                [
-                    'name'    => StringLength::class,
-                    'options' => [
-                        'min' => 6,
-                    ],
-                ],
+                new StringLength(['min' => $this->options->getMinPasswordLength()]),
             ],
             'filters'    => [new StringTrim()],
         ]);

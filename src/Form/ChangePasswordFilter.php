@@ -52,7 +52,7 @@ class ChangePasswordFilter extends InputFilter
                     'min' => $this->options->getMinPasswordLength(),
                 ]),
                 new Identical([
-                    'token' => 'newCredential',
+                    'token'    => 'newCredential',
                     'messages' => [
                         Identical::NOT_SAME => 'Passwords do not match',
                     ],

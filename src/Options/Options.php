@@ -48,9 +48,11 @@ class Options extends AbstractOptions
         'login'                       => 'lmcuser::login',
         'user'                        => 'lmcuser::user',
         'register'                    => 'lmcuser::register',
-        'change-password'             => 'lmcuser::change-password',
         'register-not-allowed'        => 'lmcuser::register-not-allowed',
+        'change-password'             => 'lmcuser::change-password',
         'change-password-not-allowed' => 'lmcuser::change-password-not-allowed',
+        'change-email'                => 'lmcuser::change-email',
+        'change-email-not-allowed'    => 'lmcuser::change-email-not-allowed',
     ];
 
     protected int $minPasswordLength = 6;

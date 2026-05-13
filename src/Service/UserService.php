@@ -99,8 +99,21 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         return $user;
     }
 
-    public function changeEmail(UserInterface $user, string $newEmail, string $password): ?UserInterface
-    {
-        // TODO: Implement changeEmail() method.
+    public function changeEmail(
+        UserInterface $user,
+        string $oldEmail,
+        string $newEmail,
+        string $credential
+    ): UserInterface|bool {
+        // check old password is valid
+        if (! password_verify($credential, $user->getPassword())) {
+            return false;
+        }
+        $user->setEmail($newEmail);
+        $data = ['oldEmail' => $oldEmail, 'newEmail' => $newEmail];
+        $this->getEventManager()->trigger(__FUNCTION__, $this, ['user' => $user, 'data' => $data]);
+        $user = $this->adapter->update($user);
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['user' => $user, 'data' => $data]);
+        return $user;
     }
 }

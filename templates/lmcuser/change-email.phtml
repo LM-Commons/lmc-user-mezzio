@@ -1,0 +1,30 @@
+<?php
+/** @var \Laminas\Form\FormInterface $form */
+$form = $this->form;
+/** @var bool $status */
+$status = $this->status;
+$form   = $this->form;
+$form->prepare();
+$form->setAttribute('method', 'post');
+$form->setAttribute('enctype', 'multipart/form-data');
+$form->setAttribute('autocomplete', 'off');
+?>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1><?php echo $this->translate('Change Email');?></h1>
+        </div>
+    </div>
+    <?php if (null !== $this->messages && count($this->messages) >0): ?>
+        <div class="row">
+            <div class="col">
+                <?php echo $this->partial('lmcuser::_alert.phtml'); ?>
+            </div>
+        </div>
+    <?php endif; ?>
+    <div class="row">
+        <div class="col">
+            <?php echo $this->partial('lmcuser::_form.phtml', ['form' => $form]) ?>
+        </div>
+    </div>
+</div>

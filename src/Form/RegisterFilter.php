@@ -90,7 +90,10 @@ class RegisterFilter extends InputFilter
                     'max' => 255,
                 ]),
                 new Identical([
-                    'token' => 'password',
+                    'token'    => 'password',
+                    'messages' => [
+                        Identical::NOT_SAME => 'Passwords do not match',
+                    ],
                 ]),
             ],
         ]);

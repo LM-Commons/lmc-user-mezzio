@@ -13,7 +13,6 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             'templates'    => $this->getTemplates(),
-            'view_helpers' => $this->getViewHelperConfig(),
         ];
     }
 
@@ -56,17 +55,6 @@ class ConfigProvider
         return [
             'paths' => [
                 'lmcuser' => [__DIR__ . '/../templates/lmcuser'],
-            ],
-        ];
-    }
-
-    private function getViewHelperConfig(): array
-    {
-        return [
-            'factories' => [
-                'lmcUserDisplayName' => View\Helper\LmcUserDisplayNameFactory::class,
-                'lmcUserIdentity'    => View\Helper\LmcUserIdentityFactory::class,
-                'lmcUserLoginWidget' => View\Helper\LmcUserLoginWidgetFactory::class,
             ],
         ];
     }

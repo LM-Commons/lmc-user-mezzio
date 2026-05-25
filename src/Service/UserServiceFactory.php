@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\Service;
 
+use Lmc\User\Authentication\Options\Options as AuthenticationOptions;
 use Lmc\User\Mezzio\Exception\InvalidConfigurationException;
 use Lmc\User\Mezzio\Options\Options;
 use Lmc\User\Repository\AdapterInterface;
@@ -25,6 +26,17 @@ class UserServiceFactory
         if (null === $mapper) {
             throw new InvalidConfigurationException(
                 'No User Repository adapter available. Did you forget to add a use repository library?'
+            );
+        }
+
+        /** @var AuthenticationOptions|null $mapper */
+        $authOptions = $container->has(AuthenticationOptions::class)
+            ? $container->get(AuthenticationOptions::class)
+            : null;
+
+        if (null === $authOptions) {
+            throw new InvalidConfigurationException(
+                'Lmc User Authentication is not installed'
             );
         }
 
@@ -50,6 +62,7 @@ class UserServiceFactory
             $container->get(Options::class),
             $container->get('lmcuser_register_form_hydrator'),
             $user,
+            $authOptions
         );
     }
 }

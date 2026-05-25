@@ -8,6 +8,7 @@ use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerAwareTrait;
 use Laminas\Form\Form;
 use Laminas\Hydrator\HydratorInterface;
+use Lmc\User\Authentication\Options\Options as AuthenticationOptions;
 use Lmc\User\Mezzio\Options\Options;
 use Lmc\User\Repository\AdapterInterface;
 use Lmc\User\Repository\UserInterface;
@@ -18,13 +19,14 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
     use EventManagerAwareTrait;
 
     public function __construct(
-        private AdapterInterface $adapter,
-        private Form $loginForm,
-        private Form $registerForm,
+        private readonly AdapterInterface $adapter,
+        private readonly Form $loginForm,
+        private readonly Form $registerForm,
         private readonly Form $changePasswordForm,
-        private Options $options,
-        private HydratorInterface $formHydrator,
+        private readonly Options $options,
+        private readonly HydratorInterface $formHydrator,
         private readonly UserInterface $userEntity,
+        private readonly AuthenticationOptions $authenticationOptions,
     ) {
     }
 
@@ -40,7 +42,7 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         }
 
         /** @var UserInterface $user */
-        $user     = $this->registerForm->getData();
+        $user = $this->registerForm->getData();
         $user->setRoles($this->options->getDefaultRoles());
 
         if ($this->options->getEnableUsername()) {
@@ -50,8 +52,8 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
             $user->setDisplayName($data['display_name']);
         }
         // If user state is enabled, set the default state value
-        if ($this->options->getEnableUserState()) {
-            $user->setState($this->options->getDefaultUserState());
+        if ($this->authenticationOptions->getEnableUserState()) {
+            $user->setState($this->authenticationOptions->getDefaultUserState());
         }
         $this->getEventManager()->trigger(
             __FUNCTION__,

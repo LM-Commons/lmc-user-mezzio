@@ -9,6 +9,10 @@ use Laminas\Stdlib\AbstractOptions;
 use function array_merge;
 use function rtrim;
 
+/**
+ * @template TValue
+ * @extends AbstractOptions<TValue>
+ */
 class Options extends AbstractOptions
 {
     //phpcs:disable
@@ -22,8 +26,6 @@ class Options extends AbstractOptions
     protected int $loginFormTimeout               = 300;
     protected int $userFormTimeout                = 300;
     protected bool $loginAfterRegistration        = true;
-    protected bool $enableUserState               = false;
-    protected int $defaultUserState               = 1;
     protected array $authIdentityFields           = ['email'];
     protected ?string $userEntityClass            = null;
     protected string $userLoginWidgetViewTemplate = 'lmc-user/user/login.phtml';
@@ -33,7 +35,6 @@ class Options extends AbstractOptions
     protected bool $useRegistrationFormCaptcha    = false;
     protected bool $useLoginFormCaptcha           = false;
     protected bool $useLoginFormCsrf              = true;
-    protected int $passwordCost                   = 14;
     protected array $formCaptchaOptions           = [
         'class'   => 'figlet',
         'options' => [
@@ -164,28 +165,6 @@ class Options extends AbstractOptions
     public function getLoginAfterRegistration(): bool
     {
         return $this->loginAfterRegistration;
-    }
-
-    public function getEnableUserState(): bool
-    {
-        return $this->enableUserState;
-    }
-
-    public function setEnableUserState(bool $flag): self
-    {
-        $this->enableUserState = $flag;
-        return $this;
-    }
-
-    public function getDefaultUserState(): int
-    {
-        return $this->defaultUserState;
-    }
-
-    public function setDefaultUserState(int $state): self
-    {
-        $this->defaultUserState = $state;
-        return $this;
     }
 
     public function getAllowedLoginStates(): array

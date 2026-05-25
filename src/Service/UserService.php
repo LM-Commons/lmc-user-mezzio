@@ -8,28 +8,25 @@ use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerAwareTrait;
 use Laminas\Form\Form;
 use Laminas\Hydrator\HydratorInterface;
+use Lmc\User\Authentication\Options\Options as AuthenticationOptions;
 use Lmc\User\Mezzio\Options\Options;
 use Lmc\User\Repository\AdapterInterface;
 use Lmc\User\Repository\UserInterface;
 use Override;
-
-use function password_hash;
-use function password_verify;
-
-use const PASSWORD_BCRYPT;
 
 final class UserService implements EventManagerAwareInterface, UserServiceInterface
 {
     use EventManagerAwareTrait;
 
     public function __construct(
-        private AdapterInterface $adapter,
-        private Form $loginForm,
-        private Form $registerForm,
+        private readonly AdapterInterface $adapter,
+        private readonly Form $loginForm,
+        private readonly Form $registerForm,
         private readonly Form $changePasswordForm,
-        private Options $options,
-        private HydratorInterface $formHydrator,
+        private readonly Options $options,
+        private readonly HydratorInterface $formHydrator,
         private readonly UserInterface $userEntity,
+        private readonly AuthenticationOptions $authenticationOptions,
     ) {
     }
 
@@ -46,13 +43,6 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
 
         /** @var UserInterface $user */
         $user = $this->registerForm->getData();
-        $user->setPassword(
-            password_hash(
-                $user->getPassword(),
-                PASSWORD_BCRYPT,
-                ['cost' => $this->options->getPasswordCost()]
-            )
-        );
         $user->setRoles($this->options->getDefaultRoles());
 
         if ($this->options->getEnableUsername()) {
@@ -62,8 +52,8 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
             $user->setDisplayName($data['display_name']);
         }
         // If user state is enabled, set the default state value
-        if ($this->options->getEnableUserState()) {
-            $user->setState($this->options->getDefaultUserState());
+        if ($this->authenticationOptions->getEnableUserState()) {
+            $user->setState($this->authenticationOptions->getDefaultUserState());
         }
         $this->getEventManager()->trigger(
             __FUNCTION__,
@@ -82,19 +72,12 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
     public function changePassword(UserInterface $user, string $oldPassword, string $newPassword): UserInterface|bool
     {
         // check old password is valid
-        if (! password_verify($oldPassword, $user->getPassword())) {
+        if (! $this->adapter->validateCredential($user, $oldPassword)) {
             return false;
         }
-        $user->setPassword(
-            password_hash(
-                $newPassword,
-                PASSWORD_BCRYPT,
-                ['cost' => $this->options->getPasswordCost()]
-            )
-        );
         $data = ['oldPassword' => $oldPassword, 'newPassword' => $newPassword];
         $this->getEventManager()->trigger(__FUNCTION__, $this, ['user' => $user, 'data' => $data]);
-        $user = $this->adapter->update($user);
+        $this->adapter->updateCredential($user, $newPassword);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['user' => $user, 'data' => $data]);
         return $user;
     }
@@ -105,8 +88,8 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         string $newEmail,
         string $credential
     ): UserInterface|bool {
-        // check old password is valid
-        if (! password_verify($credential, $user->getPassword())) {
+        // check password is valid
+        if (! $this->adapter->validateCredential($user, $credential)) {
             return false;
         }
         $user->setEmail($newEmail);

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Lmc\User\Mezzio\Service;
 
-use Laminas\Hydrator\HydratorInterface;
 use Lmc\User\Mezzio\Exception\InvalidConfigurationException;
 use Lmc\User\Mezzio\Options\Options;
 use Lmc\User\Repository\AdapterInterface;
 use Lmc\User\Repository\UserInterface;
-use MyProject\Container;
 use Psr\Container\ContainerInterface;
 use Webmozart\Assert\Assert;
+
+use function is_callable;
 
 class UserServiceFactory
 {

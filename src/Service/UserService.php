@@ -13,11 +13,6 @@ use Lmc\User\Repository\AdapterInterface;
 use Lmc\User\Repository\UserInterface;
 use Override;
 
-use function password_hash;
-use function password_verify;
-
-use const PASSWORD_BCRYPT;
-
 final class UserService implements EventManagerAwareInterface, UserServiceInterface
 {
     use EventManagerAwareTrait;
@@ -45,14 +40,7 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         }
 
         /** @var UserInterface $user */
-        $user = $this->registerForm->getData();
-        $user->setPassword(
-            password_hash(
-                $user->getPassword(),
-                PASSWORD_BCRYPT,
-                ['cost' => $this->options->getPasswordCost()]
-            )
-        );
+        $user     = $this->registerForm->getData();
         $user->setRoles($this->options->getDefaultRoles());
 
         if ($this->options->getEnableUsername()) {
@@ -82,19 +70,12 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
     public function changePassword(UserInterface $user, string $oldPassword, string $newPassword): UserInterface|bool
     {
         // check old password is valid
-        if (! password_verify($oldPassword, $user->getPassword())) {
+        if (! $this->adapter->validateCredential($user, $oldPassword)) {
             return false;
         }
-        $user->setPassword(
-            password_hash(
-                $newPassword,
-                PASSWORD_BCRYPT,
-                ['cost' => $this->options->getPasswordCost()]
-            )
-        );
         $data = ['oldPassword' => $oldPassword, 'newPassword' => $newPassword];
         $this->getEventManager()->trigger(__FUNCTION__, $this, ['user' => $user, 'data' => $data]);
-        $user = $this->adapter->update($user);
+        $this->adapter->updateCredential($user, $newPassword);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, ['user' => $user, 'data' => $data]);
         return $user;
     }
@@ -105,8 +86,8 @@ final class UserService implements EventManagerAwareInterface, UserServiceInterf
         string $newEmail,
         string $credential
     ): UserInterface|bool {
-        // check old password is valid
-        if (! password_verify($credential, $user->getPassword())) {
+        // check password is valid
+        if (! $this->adapter->validateCredential($user, $credential)) {
             return false;
         }
         $user->setEmail($newEmail);

@@ -255,17 +255,6 @@ class Options extends AbstractOptions
         return $this->userEntityClass;
     }
 
-    public function setPasswordCost(int $passwordCost): self
-    {
-        $this->passwordCost = $passwordCost;
-        return $this;
-    }
-
-    public function getPasswordCost(): int
-    {
-        return $this->passwordCost;
-    }
-
     public function setFormCaptchaOptions(array $formCaptchaOptions): self
     {
         $this->formCaptchaOptions = $formCaptchaOptions;
